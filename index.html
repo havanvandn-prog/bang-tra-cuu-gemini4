@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bảng Tra Cứu Chọn Model Gemini 4 (Hydrogen · Neon · Argon)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --border: #e2e8f0;
+      --text: #0f172a;
+      --muted: #475569;
+      --hydro-bg: #ecfeff;
+      --hydro-text: #0e7490;
+      --hydro-border: #a5f3fc;
+      --neon-bg: #eef2ff;
+      --neon-text: #3730a3;
+      --neon-border: #c7d2fe;
+      --argon-bg: #fef3c7;
+      --argon-text: #92400e;
+      --argon-border: #fde68a;
+      --primary: #1e3a8a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      padding: 24px 16px 48px;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    header {
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* Quick Cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+    }
+
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .badge-hydro {
+      background: var(--hydro-bg);
+      color: var(--hydro-text);
+      border: 1px solid var(--hydro-border);
+    }
+
+    .badge-neon {
+      background: var(--neon-bg);
+      color: var(--neon-text);
+      border: 1px solid var(--neon-border);
+    }
+
+    .badge-argon {
+      background: var(--argon-bg);
+      color: var(--argon-text);
+      border: 1px solid var(--argon-border);
+    }
+
+    .card p {
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    /* Controls */
+    .controls {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .search-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .search-input {
+      flex: 1 1 260px;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.92rem;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary);
+    }
+
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .pill-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .pill {
+      border: 1px solid var(--border);
+      background: #f8fafc;
+      color: var(--muted);
+      font-family: inherit;
+      font-size: 0.84rem;
+      font-weight: 600;
+      padding: 7px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s;
+      min-height: 36px;
+    }
+
+    .pill:hover {
+      background: #f1f5f9;
+      color: var(--text);
+    }
+
+    .pill.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    /* Table */
+    .table-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow-x: auto;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    thead th {
+      background: #f1f5f9;
+      color: var(--text);
+      font-weight: 700;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    tbody td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr:hover {
+      background: #f8fafc;
+    }
+
+    .cat-tag {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #334155;
+      background: #f1f5f9;
+      padding: 3px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 32px 16px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    /* Rules Box */
+    .rules {
+      margin-top: 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--primary);
+      border-radius: 10px;
+      padding: 16px 20px;
+    }
+
+    .rules h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .rules ol {
+      padding-left: 20px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .rules li {
+      margin-bottom: 4px;
+    }
+
+    .rules strong {
+      color: var(--text);
+    }
+
+    .count-info {
+      font-size: 0.84rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    @media (max-width: 820px) {
+      .cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 16px 12px 36px;
+      }
+      thead {
+        display: none;
+      }
+      tbody tr {
+        display: block;
+        border-bottom: 1px solid var(--border);
+        padding: 12px 14px;
+      }
+      tbody td {
+        display: block;
+        border: none;
+        padding: 4px 0;
+      }
+      tbody td[data-label="Lĩnh vực"] {
+        margin-bottom: 4px;
+      }
+      tbody td[data-label="Tác vụ cụ thể"] {
+        font-weight: 600;
+        color: var(--text);
+      }
+      tbody td[data-label="Lý do"] {
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Bảng Tra Cứu Chọn Model Gemini 4</h1>
+      <p class="subtitle">Áp dụng cho Thiết kế Website/Landing Page · Google Ads · Tool SaaS · SEO</p>
+    </header>
+
+    <section class="cards">
+      <div class="card">
+        <div class="card-head">
+          <span class="card-title">Gemini 4 Hydrogen</span>
+          <span class="badge badge-hydro">Nhanh · Tiết kiệm</span>
+        </div>
+        <p>Việc nhỏ, rõ đầu việc, sửa vặt, chạy lặp số lượng lớn, không cần suy luận nhiều tầng.</p>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <span class="card-title">Gemini 4 Neon</span>
+          <span class="badge badge-neon">Mặc định · Cân bằng</span>
+        </div>
+        <p>Chọn đầu tiên cho 80% công việc chuyên môn. Code, xử lý bảng biểu và làm nội dung ổn định.</p>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <span class="card-title">Gemini 4 Argon</span>
+          <span class="badge badge-argon">Chuyên sâu · Hạng nặng</span>
+        </div>
+        <p>Việc khó, ảnh hưởng trực tiếp tới ngân sách/kiến trúc, cần kiểm định khắt khe nhiều lớp.</p>
+      </div>
+    </section>
+
+    <section class="controls">
+      <div class="search-row">
+        <input
+          type="text"
+          id="searchInput"
+          class="search-input"
+          placeholder="Tìm nhanh tác vụ (ví dụ: STAG, audit, CSS, SaaS, báo giá...)"
+        />
+        <span class="count-info" id="countInfo"></span>
+      </div>
+      <div class="filter-row">
+        <div class="pill-group" id="catFilters">
+          <button class="pill active" data-cat="all">Tất cả mảng</button>
+          <button class="pill" data-cat="Website">Landing Page / Web</button>
+          <button class="pill" data-cat="Google Ads">Google Ads</button>
+          <button class="pill" data-cat="SaaS">Tool SaaS</button>
+          <button class="pill" data-cat="SEO">SEO</button>
+        </div>
+        <div class="pill-group" id="modelFilters">
+          <button class="pill active" data-model="all">Tất cả Model</button>
+          <button class="pill" data-model="Hydrogen">Hydrogen</button>
+          <button class="pill" data-model="Neon">Neon</button>
+          <button class="pill" data-model="Argon">Argon</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Lĩnh vực</th>
+            <th>Tác vụ cụ thể</th>
+            <th>Model nên chọn</th>
+            <th>Lý do chọn</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+      <div id="emptyState" class="empty-state" style="display: none;">
+        Không tìm thấy tác vụ phù hợp. Thử xóa từ khóa tìm kiếm hoặc chọn "Tất cả".
+      </div>
+    </div>
+
+    <section class="rules">
+      <h2>Quy tắc nhớ nhanh 3 bước</h2>
+      <ol>
+        <li><strong>Mặc định mở việc mới bằng Neon.</strong></li>
+        <li><strong>Hạ xuống Hydrogen</strong> khi chuyển sang sửa vặt, chạy hàng loạt hoặc viết nội dung ngắn.</li>
+        <li><strong>Đẩy lên Argon</strong> khi chốt kiến trúc/chiến lược lớn, kiểm định (audit) gắt trước khi giao khách/deploy, hoặc khi Neon sửa 2 lần chưa triệt để.</li>
+      </ol>
+    </section>
+  </div>
+
+  <script>
+    const DATA = [
+      // Website / Landing Page
+      { cat: 'Website', task: 'Đổi chữ, thay ảnh, chỉnh màu, thêm nút CTA, sửa CSS nhỏ', model: 'Hydrogen', reason: 'Tác vụ rõ ràng, sửa tức thì, tiết kiệm hạn mức.' },
+      { cat: 'Website', task: 'Nén/resize ảnh WebP, dọn file rác dự án, đổi tên file hàng loạt', model: 'Hydrogen', reason: 'Việc lặp lại, chỉ cần chạy nhanh và đúng lệnh.' },
+      { cat: 'Website', task: 'Dựng Landing Page / Website mới từ brief hoặc mẫu đã chốt', model: 'Neon', reason: 'Cân bằng tốt giữa thẩm mỹ UI, responsive và tốc độ code.' },
+      { cat: 'Website', task: 'Chuyển HTML sang WordPress Theme, dựng trang Gutenberg', model: 'Neon', reason: 'Xử lý nhiều file liên kết ổn định, ít vỡ cấu trúc.' },
+      { cat: 'Website', task: 'Audit UI/UX, kiểm tra responsive Mobile/Desktop, cài GA4/Clarity', model: 'Neon', reason: 'Đủ sâu để soi lỗi giao diện và gắn mã đo lường chuẩn xác.' },
+      { cat: 'Website', task: 'Audit CRO toàn diện website trước khi chạy Ads, đề xuất tái cấu trúc lớn', model: 'Argon', reason: 'Cần phân tích sâu hành trình khách hàng và điểm nghẽn chuyển đổi.' },
+      { cat: 'Website', task: 'Xử lý lỗi tốc độ / Core Web Vitals phức tạp, diệt mã độc / bảo mật web', model: 'Argon', reason: 'Đòi hỏi chẩn đoán kỹ nguyên nhân gốc, tránh làm gián đoạn web.' },
+
+      // Google Ads
+      { cat: 'Google Ads', task: 'Lọc sơ bộ danh sách cụm từ tìm kiếm (Search Terms) rác dễ thấy', model: 'Hydrogen', reason: 'Xử lý danh sách dài nhanh, chi phí thấp.' },
+      { cat: 'Google Ads', task: 'Viết thêm biến thể tiêu đề / mô tả (RSA) từ khung thông điệp đã chốt', model: 'Hydrogen', reason: 'Tạo nhiều phiên bản nhanh để chọn lọc.' },
+      { cat: 'Google Ads', task: 'Phân nhóm từ khóa STAG, chia phễu TOFU / MOFU / BOFU', model: 'Neon', reason: 'Đọc bảng dữ liệu và phân loại ý định tìm kiếm (Intent) rất chắc.' },
+      { cat: 'Google Ads', task: 'Lập kế hoạch ngân sách, dự báo KPI, viết bộ Assets chuẩn Editor', model: 'Neon', reason: 'Tính toán logic tốt, giữ đúng định dạng bảng biểu và kỹ thuật.' },
+      { cat: 'Google Ads', task: 'Xây phủ định chéo (Campaign / Ad Group) chống tự cắn traffic', model: 'Neon', reason: 'Kiểm soát logic chéo tốt, ít bỏ sót từ khóa cốt lõi.' },
+      { cat: 'Google Ads', task: 'Kiểm định (Post-Audit) tài khoản, bắt bệnh tụt chuyển đổi / CPA tăng', model: 'Argon', reason: 'Cần tư duy tổng hợp nhiều lớp dữ liệu để ra quyết định tối ưu tiền.' },
+      { cat: 'Google Ads', task: 'Giải quyết xung đột chiến dịch phức tạp hoặc xây chiến lược từ con số 0', model: 'Argon', reason: 'Suy luận sâu, giảm tối đa rủi ro đốt ngân sách.' },
+
+      // Tool SaaS
+      { cat: 'SaaS', task: 'Viết component UI đơn giản, tạo dữ liệu mẫu, viết chú thích ngắn', model: 'Hydrogen', reason: 'Nhanh gọn, không cần suy luận phức tạp.' },
+      { cat: 'SaaS', task: 'Sửa lỗi nhỏ đã rõ dòng code và nguyên nhân', model: 'Hydrogen', reason: 'Sửa dứt điểm ngay, tiết kiệm thời gian chờ.' },
+      { cat: 'SaaS', task: 'Code tính năng mới (Frontend + Backend), nối API, viết test TDD', model: 'Neon', reason: 'Điểm ngọt cho lập trình thực chiến, viết code sạch và ổn định.' },
+      { cat: 'SaaS', task: 'Review code, kiểm tra lỗi UI/UX do AI tạo, refactor mức vừa', model: 'Neon', reason: 'Soát lỗi logic tốt trên nhiều file cùng lúc.' },
+      { cat: 'SaaS', task: 'Thiết kế kiến trúc hệ thống, chọn Design Pattern, thiết kế Database', model: 'Argon', reason: 'Quyết định nền tảng ngay từ đầu, tránh phải đập đi làm lại.' },
+      { cat: 'SaaS', task: 'Debug lỗi hóc búa (xung đột luồng, rò rỉ hiệu năng) mà Neon chưa gỡ được', model: 'Argon', reason: 'Đào sâu nguyên nhân gốc qua nhiều tầng mã nguồn.' },
+      { cat: 'SaaS', task: 'Quét bảo mật (OWASP), kiểm toán luồng thanh toán / phân quyền trước deploy', model: 'Argon', reason: 'Cần độ khắt khe tối đa để không lọt lỗ hổng nghiêm trọng.' },
+
+      // SEO
+      { cat: 'SEO', task: 'Viết Meta Title/Description, Alt ảnh, tóm tắt bài, chỉnh văn phong ngắn', model: 'Hydrogen', reason: 'Tác vụ khối lượng lớn, cần tốc độ cao.' },
+      { cat: 'SEO', task: 'Kiểm tra nhanh chuẩn Yoast / On-page cơ bản cho từng bài viết', model: 'Hydrogen', reason: 'Tiêu chí rõ ràng, đối chiếu rất nhanh.' },
+      { cat: 'SEO', task: 'Nghiên cứu Seed Keyword, gom Topic Cluster, lập Content Plan / Outline', model: 'Neon', reason: 'Hiểu tốt cấu trúc chủ đề, hạn chế ăn thịt từ khóa.' },
+      { cat: 'SEO', task: 'Lập bảng báo giá SEO, tính khối lượng công việc và tạo Proposal HTML', model: 'Neon', reason: 'Xử lý tốt cả logic tính toán lẫn định dạng đầu ra đẹp.' },
+      { cat: 'SEO', task: 'Kiểm tra nội dung chuẩn SEO Funnel, tối ưu GEO / AI Search (llms.txt)', model: 'Neon', reason: 'Đủ độ sâu chuyên môn để chấm điểm và đề xuất sửa cụ thể.' },
+      { cat: 'SEO', task: 'Audit Technical SEO toàn diện (crawl, index, schema, JS rendering)', model: 'Argon', reason: 'Nhiều biến số kỹ thuật đan xen, cần phân loại ưu tiên P0–P3 chuẩn.' },
+      { cat: 'SEO', task: 'Kiểm định (Audit) toàn bộ Plan SEO lớn hoặc gỡ án phạt / tụt traffic nặng', model: 'Argon', reason: 'Đòi hỏi tư duy chiến lược và đối chiếu đa chiều không bỏ sót rủi ro.' }
+    ];
+
+    let activeCat = 'all';
+    let activeModel = 'all';
+    let searchTerm = '';
+
+    const badgeMap = {
+      Hydrogen: '<span class="badge badge-hydro">Hydrogen</span>',
+      Neon: '<span class="badge badge-neon">Neon</span>',
+      Argon: '<span class="badge badge-argon">Argon</span>'
+    };
+
+    const catLabelMap = {
+      Website: 'Landing Page / Web',
+      'Google Ads': 'Google Ads',
+      SaaS: 'Tool SaaS',
+      SEO: 'SEO'
+    };
+
+    const tableBody = document.getElementById('tableBody');
+    const emptyState = document.getElementById('emptyState');
+    const countInfo = document.getElementById('countInfo');
+    const searchInput = document.getElementById('searchInput');
+
+    function render() {
+      const q = searchTerm.trim().toLowerCase();
+      const filtered = DATA.filter(item => {
+        const matchCat = activeCat === 'all' || item.cat === activeCat;
+        const matchModel = activeModel === 'all' || item.model === activeModel;
+        const matchSearch =
+          !q ||
+          item.task.toLowerCase().includes(q) ||
+          item.reason.toLowerCase().includes(q) ||
+          item.model.toLowerCase().includes(q) ||
+          catLabelMap[item.cat].toLowerCase().includes(q);
+        return matchCat && matchModel && matchSearch;
+      });
+
+      countInfo.textContent = `Hiển thị ${filtered.length} / ${DATA.length} tác vụ`;
+
+      if (filtered.length === 0) {
+        tableBody.innerHTML = '';
+        emptyState.style.display = 'block';
+        return;
+      }
+
+      emptyState.style.display = 'none';
+      tableBody.innerHTML = filtered
+        .map(
+          item => `
+          <tr>
+            <td data-label="Lĩnh vực"><span class="cat-tag">${catLabelMap[item.cat]}</span></td>
+            <td data-label="Tác vụ cụ thể">${item.task}</td>
+            <td data-label="Model nên chọn">${badgeMap[item.model]}</td>
+            <td data-label="Lý do">${item.reason}</td>
+          </tr>
+        `
+        )
+        .join('');
+    }
+
+    document.getElementById('catFilters').addEventListener('click', e => {
+      const btn = e.target.closest('.pill');
+      if (!btn) return;
+      document.querySelectorAll('#catFilters .pill').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      activeCat = btn.dataset.cat;
+      render();
+    });
+
+    document.getElementById('modelFilters').addEventListener('click', e => {
+      const btn = e.target.closest('.pill');
+      if (!btn) return;
+      document.querySelectorAll('#modelFilters .pill').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      activeModel = btn.dataset.model;
+      render();
+    });
+
+    searchInput.addEventListener('input', e => {
+      searchTerm = e.target.value;
+      render();
+    });
+
+    render();
+  </script>
+</body>
+</html>
