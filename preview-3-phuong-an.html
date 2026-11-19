@@ -418,6 +418,22 @@
       background: #f8fafc;
     }
 
+    th.col-compact,
+    td.col-compact {
+      width: 1%;
+      white-space: nowrap;
+    }
+
+    th.col-model,
+    td.col-model {
+      padding-right: 8px;
+    }
+
+    th.col-level,
+    td.col-level {
+      padding-left: 8px;
+    }
+
     /* PA 2: 2x2 Grid Dashboard */
     .grid-2x2 {
       display: grid;
@@ -828,10 +844,10 @@
             <table>
               <thead>
                 <tr>
-                  <th style="width: 40%;">Công việc cần làm</th>
-                  <th style="width: 14%;">Model</th>
-                  <th style="width: 14%;">Mức suy nghĩ</th>
-                  <th style="width: 32%;">Vì sao chọn</th>
+                  <th style="width: 44%;">Công việc cần làm</th>
+                  <th class="col-compact col-model">Model</th>
+                  <th class="col-compact col-level">Mức suy nghĩ</th>
+                  <th style="width: 36%;">Vì sao chọn</th>
                 </tr>
               </thead>
               <tbody>
@@ -840,8 +856,8 @@
                     item => `
                     <tr>
                       <td data-label="Tác vụ cụ thể">${highlightText(item.task, query)}</td>
-                      <td data-label="Model">${badgeMap[item.model]}</td>
-                      <td data-label="Mức suy nghĩ">${renderLevelBadge(item.level)}</td>
+                      <td data-label="Model" class="col-compact col-model">${badgeMap[item.model]}</td>
+                      <td data-label="Mức suy nghĩ" class="col-compact col-level">${renderLevelBadge(item.level)}</td>
                       <td data-label="Lý do">${highlightText(item.reason, query)}</td>
                     </tr>
                   `
