@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bảng Tra Cứu Chọn Model Gemini 4 (Hydrogen · Neon · Argon)</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png?v=1" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png?v=1" />
+  <link rel="shortcut icon" href="favicon.ico?v=1" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=1" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -115,6 +119,34 @@
       background: var(--argon-bg);
       color: var(--argon-text);
       border: 1px solid var(--argon-border);
+    }
+
+    .model-stack {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .level-pill {
+      display: inline-block;
+      font-size: 0.74rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .level-medium {
+      background: #f1f5f9;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+    }
+
+    .level-high {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #fecaca;
     }
 
     .card p {
@@ -380,6 +412,11 @@
           <button class="pill" data-model="Neon">Neon</button>
           <button class="pill" data-model="Argon">Argon</button>
         </div>
+        <div class="pill-group" id="levelFilters">
+          <button class="pill active" data-level="all">Mọi mức</button>
+          <button class="pill" data-level="Medium">Medium</button>
+          <button class="pill" data-level="High">High</button>
+        </div>
       </div>
     </section>
 
@@ -389,7 +426,7 @@
           <tr>
             <th>Lĩnh vực</th>
             <th>Tác vụ cụ thể</th>
-            <th>Model nên chọn</th>
+            <th>Model &amp; Mức suy nghĩ</th>
             <th>Lý do chọn</th>
           </tr>
         </thead>
@@ -401,11 +438,12 @@
     </div>
 
     <section class="rules">
-      <h2>Quy tắc nhớ nhanh 3 bước</h2>
+      <h2>Quy tắc nhớ nhanh (Model &amp; Mức Medium / High)</h2>
       <ol>
-        <li><strong>Mặc định mở việc mới bằng Neon.</strong></li>
-        <li><strong>Hạ xuống Hydrogen</strong> khi chuyển sang sửa vặt, chạy hàng loạt hoặc viết nội dung ngắn.</li>
-        <li><strong>Đẩy lên Argon</strong> khi chốt kiến trúc/chiến lược lớn, kiểm định (audit) gắt trước khi giao khách/deploy, hoặc khi Neon sửa 2 lần chưa triệt để.</li>
+        <li><strong>Mặc định mở việc mới bằng Neon (Medium).</strong></li>
+        <li><strong>Hạ xuống Hydrogen (Medium)</strong> khi chuyển sang sửa vặt, chạy hàng loạt hoặc viết nội dung ngắn.</li>
+        <li><strong>Đẩy lên Argon</strong> khi chốt kiến trúc/chiến lược lớn hoặc kiểm định (audit) gắt trước khi giao khách/deploy.</li>
+        <li><strong>Khi nào chọn Medium vs High:</strong> Giữ <strong>Medium</strong> cho 80% việc dựng, viết và lập kế hoạch. Chỉ bật <strong>High</strong> khi kiểm toán rủi ro cao (bảo mật, tiền quảng cáo, phủ định chéo, gỡ lỗi sâu).</li>
       </ol>
     </section>
   </div>
@@ -413,44 +451,45 @@
   <script>
     const DATA = [
       // Website / Landing Page
-      { cat: 'Website', task: 'Đổi chữ, thay ảnh, chỉnh màu, thêm nút CTA, sửa CSS nhỏ', model: 'Hydrogen', reason: 'Tác vụ rõ ràng, sửa tức thì, tiết kiệm hạn mức.' },
-      { cat: 'Website', task: 'Nén/resize ảnh WebP, dọn file rác dự án, đổi tên file hàng loạt', model: 'Hydrogen', reason: 'Việc lặp lại, chỉ cần chạy nhanh và đúng lệnh.' },
-      { cat: 'Website', task: 'Dựng Landing Page / Website mới từ brief hoặc mẫu đã chốt', model: 'Neon', reason: 'Cân bằng tốt giữa thẩm mỹ UI, responsive và tốc độ code.' },
-      { cat: 'Website', task: 'Chuyển HTML sang WordPress Theme, dựng trang Gutenberg', model: 'Neon', reason: 'Xử lý nhiều file liên kết ổn định, ít vỡ cấu trúc.' },
-      { cat: 'Website', task: 'Audit UI/UX, kiểm tra responsive Mobile/Desktop, cài GA4/Clarity', model: 'Neon', reason: 'Đủ sâu để soi lỗi giao diện và gắn mã đo lường chuẩn xác.' },
-      { cat: 'Website', task: 'Audit CRO toàn diện website trước khi chạy Ads, đề xuất tái cấu trúc lớn', model: 'Argon', reason: 'Cần phân tích sâu hành trình khách hàng và điểm nghẽn chuyển đổi.' },
-      { cat: 'Website', task: 'Xử lý lỗi tốc độ / Core Web Vitals phức tạp, diệt mã độc / bảo mật web', model: 'Argon', reason: 'Đòi hỏi chẩn đoán kỹ nguyên nhân gốc, tránh làm gián đoạn web.' },
+      { cat: 'Website', task: 'Đổi chữ, thay ảnh, chỉnh màu, thêm nút CTA, sửa CSS nhỏ', model: 'Hydrogen', level: 'Medium', reason: 'Tác vụ rõ ràng, sửa tức thì, tiết kiệm hạn mức.' },
+      { cat: 'Website', task: 'Nén/resize ảnh WebP, dọn file rác dự án, đổi tên file hàng loạt', model: 'Hydrogen', level: 'Medium', reason: 'Việc lặp lại, chỉ cần chạy nhanh và đúng lệnh.' },
+      { cat: 'Website', task: 'Dựng Landing Page / Website mới từ brief hoặc mẫu đã chốt', model: 'Neon', level: 'Medium', reason: 'Cân bằng tốt giữa thẩm mỹ UI, responsive và tốc độ code.' },
+      { cat: 'Website', task: 'Chuyển HTML sang WordPress Theme, dựng trang Gutenberg', model: 'Neon', level: 'Medium', reason: 'Xử lý nhiều file liên kết ổn định, ít vỡ cấu trúc.' },
+      { cat: 'Website', task: 'Audit UI/UX, kiểm tra responsive Mobile/Desktop, cài GA4/Clarity', model: 'Neon', level: 'High', reason: 'Cần soi kỹ lỗi giao diện và gắn mã đo lường chính xác.' },
+      { cat: 'Website', task: 'Audit CRO toàn diện website trước khi chạy Ads, đề xuất tái cấu trúc lớn', model: 'Argon', level: 'Medium', reason: 'Argon mức Medium đã phân tích sâu hành trình và điểm nghẽn.' },
+      { cat: 'Website', task: 'Xử lý lỗi tốc độ / Core Web Vitals phức tạp, diệt mã độc / bảo mật web', model: 'Argon', level: 'High', reason: 'Đụng hệ thống đang chạy, cần chẩn đoán gốc tránh lỗi web.' },
 
       // Google Ads
-      { cat: 'Google Ads', task: 'Lọc sơ bộ danh sách cụm từ tìm kiếm (Search Terms) rác dễ thấy', model: 'Hydrogen', reason: 'Xử lý danh sách dài nhanh, chi phí thấp.' },
-      { cat: 'Google Ads', task: 'Viết thêm biến thể tiêu đề / mô tả (RSA) từ khung thông điệp đã chốt', model: 'Hydrogen', reason: 'Tạo nhiều phiên bản nhanh để chọn lọc.' },
-      { cat: 'Google Ads', task: 'Phân nhóm từ khóa STAG, chia phễu TOFU / MOFU / BOFU', model: 'Neon', reason: 'Đọc bảng dữ liệu và phân loại ý định tìm kiếm (Intent) rất chắc.' },
-      { cat: 'Google Ads', task: 'Lập kế hoạch ngân sách, dự báo KPI, viết bộ Assets chuẩn Editor', model: 'Neon', reason: 'Tính toán logic tốt, giữ đúng định dạng bảng biểu và kỹ thuật.' },
-      { cat: 'Google Ads', task: 'Xây phủ định chéo (Campaign / Ad Group) chống tự cắn traffic', model: 'Neon', reason: 'Kiểm soát logic chéo tốt, ít bỏ sót từ khóa cốt lõi.' },
-      { cat: 'Google Ads', task: 'Kiểm định (Post-Audit) tài khoản, bắt bệnh tụt chuyển đổi / CPA tăng', model: 'Argon', reason: 'Cần tư duy tổng hợp nhiều lớp dữ liệu để ra quyết định tối ưu tiền.' },
-      { cat: 'Google Ads', task: 'Giải quyết xung đột chiến dịch phức tạp hoặc xây chiến lược từ con số 0', model: 'Argon', reason: 'Suy luận sâu, giảm tối đa rủi ro đốt ngân sách.' },
+      { cat: 'Google Ads', task: 'Lọc sơ bộ danh sách cụm từ tìm kiếm (Search Terms) rác dễ thấy', model: 'Hydrogen', level: 'Medium', reason: 'Xử lý danh sách dài nhanh, chi phí thấp.' },
+      { cat: 'Google Ads', task: 'Viết thêm biến thể tiêu đề / mô tả (RSA) từ khung thông điệp đã chốt', model: 'Hydrogen', level: 'Medium', reason: 'Tạo nhiều phiên bản nhanh để chọn lọc.' },
+      { cat: 'Google Ads', task: 'Phân nhóm từ khóa STAG, chia phễu TOFU / MOFU / BOFU', model: 'Neon', level: 'Medium', reason: 'Đọc bảng dữ liệu và phân loại ý định tìm kiếm (Intent) rất chắc.' },
+      { cat: 'Google Ads', task: 'Lập kế hoạch ngân sách, dự báo KPI, viết bộ Assets chuẩn Editor', model: 'Neon', level: 'Medium', reason: 'Tính toán logic tốt, giữ đúng định dạng bảng biểu và kỹ thuật.' },
+      { cat: 'Google Ads', task: 'Xây phủ định chéo (Campaign / Ad Group) chống tự cắn traffic', model: 'Neon', level: 'High', reason: 'Suy nghĩ kỹ logic chéo để tránh phủ định nhầm từ khóa ra đơn.' },
+      { cat: 'Google Ads', task: 'Kiểm định (Post-Audit) tài khoản, bắt bệnh tụt chuyển đổi / CPA tăng', model: 'Argon', level: 'High', reason: 'Liên quan trực tiếp tới ngân sách, cần tổng hợp đa lớp dữ liệu.' },
+      { cat: 'Google Ads', task: 'Giải quyết xung đột chiến dịch phức tạp hoặc xây chiến lược từ con số 0', model: 'Argon', level: 'Medium', reason: 'Suy luận sâu, giảm tối đa rủi ro đốt ngân sách.' },
 
       // Tool SaaS
-      { cat: 'SaaS', task: 'Viết component UI đơn giản, tạo dữ liệu mẫu, viết chú thích ngắn', model: 'Hydrogen', reason: 'Nhanh gọn, không cần suy luận phức tạp.' },
-      { cat: 'SaaS', task: 'Sửa lỗi nhỏ đã rõ dòng code và nguyên nhân', model: 'Hydrogen', reason: 'Sửa dứt điểm ngay, tiết kiệm thời gian chờ.' },
-      { cat: 'SaaS', task: 'Code tính năng mới (Frontend + Backend), nối API, viết test TDD', model: 'Neon', reason: 'Điểm ngọt cho lập trình thực chiến, viết code sạch và ổn định.' },
-      { cat: 'SaaS', task: 'Review code, kiểm tra lỗi UI/UX do AI tạo, refactor mức vừa', model: 'Neon', reason: 'Soát lỗi logic tốt trên nhiều file cùng lúc.' },
-      { cat: 'SaaS', task: 'Thiết kế kiến trúc hệ thống, chọn Design Pattern, thiết kế Database', model: 'Argon', reason: 'Quyết định nền tảng ngay từ đầu, tránh phải đập đi làm lại.' },
-      { cat: 'SaaS', task: 'Debug lỗi hóc búa (xung đột luồng, rò rỉ hiệu năng) mà Neon chưa gỡ được', model: 'Argon', reason: 'Đào sâu nguyên nhân gốc qua nhiều tầng mã nguồn.' },
-      { cat: 'SaaS', task: 'Quét bảo mật (OWASP), kiểm toán luồng thanh toán / phân quyền trước deploy', model: 'Argon', reason: 'Cần độ khắt khe tối đa để không lọt lỗ hổng nghiêm trọng.' },
+      { cat: 'SaaS', task: 'Viết component UI đơn giản, tạo dữ liệu mẫu, viết chú thích ngắn', model: 'Hydrogen', level: 'Medium', reason: 'Nhanh gọn, không cần suy luận phức tạp.' },
+      { cat: 'SaaS', task: 'Sửa lỗi nhỏ đã rõ dòng code và nguyên nhân', model: 'Hydrogen', level: 'Medium', reason: 'Sửa dứt điểm ngay, tiết kiệm thời gian chờ.' },
+      { cat: 'SaaS', task: 'Code tính năng mới (Frontend + Backend), nối API, viết test TDD', model: 'Neon', level: 'Medium', reason: 'Điểm ngọt cho lập trình thực chiến, viết code sạch và ổn định.' },
+      { cat: 'SaaS', task: 'Review code, kiểm tra lỗi UI/UX do AI tạo, refactor mức vừa', model: 'Neon', level: 'High', reason: 'Rà kỹ bug ẩn và logic liên kết trên nhiều file cùng lúc.' },
+      { cat: 'SaaS', task: 'Thiết kế kiến trúc hệ thống, chọn Design Pattern, thiết kế Database', model: 'Argon', level: 'Medium', reason: 'Quyết định nền tảng ngay từ đầu, tránh phải đập đi làm lại.' },
+      { cat: 'SaaS', task: 'Debug lỗi hóc búa (xung đột luồng, rò rỉ hiệu năng) mà Neon chưa gỡ được', model: 'Argon', level: 'High', reason: 'Đào sâu nguyên nhân gốc qua nhiều tầng mã nguồn.' },
+      { cat: 'SaaS', task: 'Quét bảo mật (OWASP), kiểm toán luồng thanh toán / phân quyền trước deploy', model: 'Argon', level: 'High', reason: 'Cần độ khắt khe tối đa để không lọt lỗ hổng nghiêm trọng.' },
 
       // SEO
-      { cat: 'SEO', task: 'Viết Meta Title/Description, Alt ảnh, tóm tắt bài, chỉnh văn phong ngắn', model: 'Hydrogen', reason: 'Tác vụ khối lượng lớn, cần tốc độ cao.' },
-      { cat: 'SEO', task: 'Kiểm tra nhanh chuẩn Yoast / On-page cơ bản cho từng bài viết', model: 'Hydrogen', reason: 'Tiêu chí rõ ràng, đối chiếu rất nhanh.' },
-      { cat: 'SEO', task: 'Nghiên cứu Seed Keyword, gom Topic Cluster, lập Content Plan / Outline', model: 'Neon', reason: 'Hiểu tốt cấu trúc chủ đề, hạn chế ăn thịt từ khóa.' },
-      { cat: 'SEO', task: 'Lập bảng báo giá SEO, tính khối lượng công việc và tạo Proposal HTML', model: 'Neon', reason: 'Xử lý tốt cả logic tính toán lẫn định dạng đầu ra đẹp.' },
-      { cat: 'SEO', task: 'Kiểm tra nội dung chuẩn SEO Funnel, tối ưu GEO / AI Search (llms.txt)', model: 'Neon', reason: 'Đủ độ sâu chuyên môn để chấm điểm và đề xuất sửa cụ thể.' },
-      { cat: 'SEO', task: 'Audit Technical SEO toàn diện (crawl, index, schema, JS rendering)', model: 'Argon', reason: 'Nhiều biến số kỹ thuật đan xen, cần phân loại ưu tiên P0–P3 chuẩn.' },
-      { cat: 'SEO', task: 'Kiểm định (Audit) toàn bộ Plan SEO lớn hoặc gỡ án phạt / tụt traffic nặng', model: 'Argon', reason: 'Đòi hỏi tư duy chiến lược và đối chiếu đa chiều không bỏ sót rủi ro.' }
+      { cat: 'SEO', task: 'Viết Meta Title/Description, Alt ảnh, tóm tắt bài, chỉnh văn phong ngắn', model: 'Hydrogen', level: 'Medium', reason: 'Tác vụ khối lượng lớn, cần tốc độ cao.' },
+      { cat: 'SEO', task: 'Kiểm tra nhanh chuẩn Yoast / On-page cơ bản cho từng bài viết', model: 'Hydrogen', level: 'Medium', reason: 'Tiêu chí rõ ràng, đối chiếu rất nhanh.' },
+      { cat: 'SEO', task: 'Nghiên cứu Seed Keyword, gom Topic Cluster, lập Content Plan / Outline', model: 'Neon', level: 'Medium', reason: 'Hiểu tốt cấu trúc chủ đề, hạn chế ăn thịt từ khóa.' },
+      { cat: 'SEO', task: 'Lập bảng báo giá SEO, tính khối lượng công việc và tạo Proposal HTML', model: 'Neon', level: 'Medium', reason: 'Xử lý tốt cả logic tính toán lẫn định dạng đầu ra đẹp.' },
+      { cat: 'SEO', task: 'Kiểm tra nội dung chuẩn SEO Funnel, tối ưu GEO / AI Search (llms.txt)', model: 'Neon', level: 'High', reason: 'Chấm điểm chi tiết và đề xuất sửa chuẩn chuyên sâu.' },
+      { cat: 'SEO', task: 'Audit Technical SEO toàn diện (crawl, index, schema, JS rendering)', model: 'Argon', level: 'Medium', reason: 'Nhiều biến số kỹ thuật, mức Medium phân loại P0–P3 rất chuẩn.' },
+      { cat: 'SEO', task: 'Kiểm định (Audit) toàn bộ Plan SEO lớn hoặc gỡ án phạt / tụt traffic nặng', model: 'Argon', level: 'High', reason: 'Rủi ro cao, cần đối chiếu đa chiều kỹ lưỡng nhất.' }
     ];
 
     let activeCat = 'all';
     let activeModel = 'all';
+    let activeLevel = 'all';
     let searchTerm = '';
 
     const badgeMap = {
@@ -458,6 +497,11 @@
       Neon: '<span class="badge badge-neon">Neon</span>',
       Argon: '<span class="badge badge-argon">Argon</span>'
     };
+
+    function renderModelWithLevel(model, level) {
+      const levelClass = level === 'High' ? 'level-high' : 'level-medium';
+      return `<div class="model-stack">${badgeMap[model]}<span class="level-pill ${levelClass}">${level}</span></div>`;
+    }
 
     const catLabelMap = {
       Website: 'Landing Page / Web',
@@ -476,13 +520,15 @@
       const filtered = DATA.filter(item => {
         const matchCat = activeCat === 'all' || item.cat === activeCat;
         const matchModel = activeModel === 'all' || item.model === activeModel;
+        const matchLevel = activeLevel === 'all' || item.level === activeLevel;
         const matchSearch =
           !q ||
           item.task.toLowerCase().includes(q) ||
           item.reason.toLowerCase().includes(q) ||
           item.model.toLowerCase().includes(q) ||
+          item.level.toLowerCase().includes(q) ||
           catLabelMap[item.cat].toLowerCase().includes(q);
-        return matchCat && matchModel && matchSearch;
+        return matchCat && matchModel && matchLevel && matchSearch;
       });
 
       countInfo.textContent = `Hiển thị ${filtered.length} / ${DATA.length} tác vụ`;
@@ -500,7 +546,7 @@
           <tr>
             <td data-label="Lĩnh vực"><span class="cat-tag">${catLabelMap[item.cat]}</span></td>
             <td data-label="Tác vụ cụ thể">${item.task}</td>
-            <td data-label="Model nên chọn">${badgeMap[item.model]}</td>
+            <td data-label="Model & Mức suy nghĩ">${renderModelWithLevel(item.model, item.level)}</td>
             <td data-label="Lý do">${item.reason}</td>
           </tr>
         `
@@ -523,6 +569,15 @@
       document.querySelectorAll('#modelFilters .pill').forEach(p => p.classList.remove('active'));
       btn.classList.add('active');
       activeModel = btn.dataset.model;
+      render();
+    });
+
+    document.getElementById('levelFilters').addEventListener('click', e => {
+      const btn = e.target.closest('.pill');
+      if (!btn) return;
+      document.querySelectorAll('#levelFilters .pill').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      activeLevel = btn.dataset.level;
       render();
     });
 

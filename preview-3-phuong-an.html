@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Xem Thử 3 Phương Án Bố Cục · Bảng Tra Cứu Gemini 4</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png?v=1" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png?v=1" />
+  <link rel="shortcut icon" href="favicon.ico?v=1" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --border: #e2e8f0;
+      --text: #0f172a;
+      --muted: #475569;
+      --hydro-bg: #ecfeff;
+      --hydro-text: #0e7490;
+      --hydro-border: #a5f3fc;
+      --neon-bg: #eef2ff;
+      --neon-text: #3730a3;
+      --neon-border: #c7d2fe;
+      --argon-bg: #fef3c7;
+      --argon-text: #92400e;
+      --argon-border: #fde68a;
+      --primary: #1e3a8a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      padding-bottom: 48px;
+    }
+
+    /* Sticky Preview Switcher Bar */
+    .preview-bar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 16px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+    }
+
+    .preview-bar-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .preview-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .preview-label {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .mode-switcher {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .mode-btn {
+      border: 1px solid var(--border);
+      background: #f8fafc;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.84rem;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s;
+      min-height: 38px;
+      white-space: nowrap;
+    }
+
+    .mode-btn:hover {
+      background: #f1f5f9;
+    }
+
+    .mode-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .mode-desc {
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+
+    .container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 24px 16px 0;
+    }
+
+    header {
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    /* Quick Cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 15px 18px;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+    }
+
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .card-title {
+      font-weight: 700;
+      font-size: 0.98rem;
+    }
+
+    .card p {
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .badge-hydro {
+      background: var(--hydro-bg);
+      color: var(--hydro-text);
+      border: 1px solid var(--hydro-border);
+    }
+
+    .badge-neon {
+      background: var(--neon-bg);
+      color: var(--neon-text);
+      border: 1px solid var(--neon-border);
+    }
+
+    .badge-argon {
+      background: var(--argon-bg);
+      color: var(--argon-text);
+      border: 1px solid var(--argon-border);
+    }
+
+    .model-stack {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .level-pill {
+      display: inline-block;
+      font-size: 0.74rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .level-medium {
+      background: #f1f5f9;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+    }
+
+    .level-high {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #fecaca;
+    }
+
+    /* Search & Filter Controls */
+    .controls {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .search-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .search-box {
+      position: relative;
+      flex: 1 1 280px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 10px 36px 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.92rem;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary);
+    }
+
+    .clear-btn {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: none;
+      background: #e2e8f0;
+      color: #334155;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+
+    .clear-btn.visible {
+      display: inline-flex;
+    }
+
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .pill-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .pill {
+      border: 1px solid var(--border);
+      background: #f8fafc;
+      color: var(--muted);
+      font-family: inherit;
+      font-size: 0.84rem;
+      font-weight: 600;
+      padding: 7px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s;
+      min-height: 36px;
+      white-space: nowrap;
+    }
+
+    .pill:hover {
+      background: #f1f5f9;
+      color: var(--text);
+    }
+
+    .pill.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .count-info {
+      font-size: 0.84rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    mark {
+      background: #fef08a;
+      color: var(--text);
+      padding: 0 2px;
+      border-radius: 3px;
+    }
+
+    /* PA 1: 4 Stacked Category Tables */
+    .stack-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .cat-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left-width: 4px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    }
+
+    .cat-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 13px 16px;
+      background: #f8fafc;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cat-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .cat-count {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--muted);
+      background: #ffffff;
+      border: 1px solid var(--border);
+      padding: 2px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .table-scroll {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    thead th {
+      background: #f1f5f9;
+      color: var(--text);
+      font-weight: 700;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    tbody td {
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr:hover {
+      background: #f8fafc;
+    }
+
+    /* PA 2: 2x2 Grid Dashboard */
+    .grid-2x2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .grid-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .grid-item {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .grid-item:last-child {
+      border-bottom: none;
+    }
+
+    .grid-item:hover {
+      background: #f8fafc;
+    }
+
+    .grid-item-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .grid-task {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+
+    .grid-reason {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    /* PA 3: Category Tabs + Global Search */
+    .tab-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .cat-tab {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 9px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.15s;
+      min-height: 40px;
+      white-space: nowrap;
+    }
+
+    .cat-tab:hover {
+      background: #f1f5f9;
+      color: var(--text);
+    }
+
+    .cat-tab.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .tab-badge {
+      font-size: 0.76rem;
+      padding: 1px 7px;
+      border-radius: 999px;
+      background: #e2e8f0;
+      color: #334155;
+    }
+
+    .cat-tab.active .tab-badge {
+      background: rgba(255, 255, 255, 0.22);
+      color: #ffffff;
+    }
+
+    .global-notice {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: #1e3a8a;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 0.86rem;
+      font-weight: 500;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .empty-state {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      text-align: center;
+      padding: 36px 16px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    /* Rules Box */
+    .rules {
+      margin-top: 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--primary);
+      border-radius: 10px;
+      padding: 16px 20px;
+    }
+
+    .rules h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .rules ol {
+      padding-left: 20px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .rules li {
+      margin-bottom: 4px;
+    }
+
+    .rules strong {
+      color: var(--text);
+    }
+
+    @media (max-width: 900px) {
+      .cards,
+      .grid-2x2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 16px 12px 0;
+      }
+      .mode-btn {
+        font-size: 0.8rem;
+        padding: 7px 10px;
+      }
+      thead {
+        display: none;
+      }
+      tbody tr {
+        display: block;
+        border-bottom: 1px solid var(--border);
+        padding: 12px 14px;
+      }
+      tbody td {
+        display: block;
+        border: none;
+        padding: 4px 0;
+      }
+      tbody td[data-label="Tác vụ cụ thể"] {
+        font-weight: 600;
+        color: var(--text);
+      }
+      tbody td[data-label="Lý do"] {
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+      .grid-item-top {
+        flex-direction: column;
+        gap: 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="preview-bar">
+    <div class="preview-bar-inner">
+      <div class="preview-top">
+        <span class="preview-label">Bản xem thử 3 bố cục (bấm chuyển để duyệt):</span>
+        <div class="mode-switcher" id="modeSwitcher">
+          <button class="mode-btn active" data-mode="pa1">PA 1: 4 bảng dọc</button>
+          <button class="mode-btn" data-mode="pa2">PA 2: Lưới 2×2</button>
+          <button class="mode-btn" data-mode="pa3">PA 3: Tab + Search</button>
+        </div>
+      </div>
+      <div class="mode-desc" id="modeDesc">
+        <strong>PA 1 (Khuyên dùng):</strong> Tách thành 4 bảng riêng xếp dọc, giữ đủ cột Lý do; khi tìm kiếm sẽ tự ẩn bảng không có kết quả.
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <header>
+      <h1>Bảng Tra Cứu Chọn Model Gemini 4</h1>
+      <p class="subtitle">Áp dụng cho Thiết kế Website/Landing Page · Google Ads · Tool SaaS · SEO</p>
+    </header>
+
+    <section class="cards">
+      <div class="card">
+        <div class="card-head">
+          <span class="card-title">Gemini 4 Hydrogen</span>
+          <span class="badge badge-hydro">Nhanh · Tiết kiệm</span>
+        </div>
+        <p>Việc nhỏ, rõ đầu việc, sửa vặt, chạy lặp số lượng lớn, mặc định dùng mức <strong>Medium</strong>.</p>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <span class="card-title">Gemini 4 Neon</span>
+          <span class="badge badge-neon">Mặc định · Cân bằng</span>
+        </div>
+        <p>Chọn đầu tiên cho 80% công việc (<strong>Medium</strong>); nâng lên <strong>High</strong> khi kiểm tra lỗi/logic chéo.</p>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <span class="card-title">Gemini 4 Argon</span>
+          <span class="badge badge-argon">Chuyên sâu · Hạng nặng</span>
+        </div>
+        <p>Chiến lược, kiến trúc hệ thống (<strong>Medium</strong>); bảo mật, tiền Ads và gỡ lỗi sâu (<strong>High</strong>).</p>
+      </div>
+    </section>
+
+    <section class="controls">
+      <div class="search-row">
+        <div class="search-box">
+          <input
+            type="text"
+            id="searchInput"
+            class="search-input"
+            placeholder="Tìm nhanh tác vụ xuyên cả 4 mảng (ví dụ: STAG, audit, CSS, SaaS, báo giá...)"
+          />
+          <button type="button" id="clearSearchBtn" class="clear-btn" aria-label="Xóa tìm kiếm">×</button>
+        </div>
+        <span class="count-info" id="countInfo"></span>
+      </div>
+      <div class="filter-row">
+        <div class="pill-group" id="modelFilters">
+          <button class="pill active" data-model="all">Tất cả Model</button>
+          <button class="pill" data-model="Hydrogen">Hydrogen</button>
+          <button class="pill" data-model="Neon">Neon</button>
+          <button class="pill" data-model="Argon">Argon</button>
+        </div>
+        <div class="pill-group" id="levelFilters">
+          <button class="pill active" data-level="all">Mọi mức</button>
+          <button class="pill" data-level="Medium">Medium</button>
+          <button class="pill" data-level="High">High</button>
+        </div>
+      </div>
+    </section>
+
+    <main id="viewContainer"></main>
+
+    <section class="rules">
+      <h2>Quy tắc nhớ nhanh (Model &amp; Mức Medium / High)</h2>
+      <ol>
+        <li><strong>Mặc định mở việc mới bằng Neon (Medium).</strong></li>
+        <li><strong>Hạ xuống Hydrogen (Medium)</strong> khi chuyển sang sửa vặt, chạy hàng loạt hoặc viết nội dung ngắn.</li>
+        <li><strong>Đẩy lên Argon</strong> khi chốt kiến trúc/chiến lược lớn hoặc kiểm định (audit) gắt trước khi giao khách/deploy.</li>
+        <li><strong>Khi nào chọn Medium vs High:</strong> Giữ <strong>Medium</strong> cho 80% việc dựng, viết và lập kế hoạch. Chỉ bật <strong>High</strong> khi kiểm toán rủi ro cao (bảo mật, tiền quảng cáo, phủ định chéo, gỡ lỗi sâu).</li>
+      </ol>
+    </section>
+  </div>
+
+  <script>
+    const CATEGORIES = [
+      { key: 'Website', label: '1. Thiết kế Landing Page / Website', shortLabel: 'Landing Page / Web', color: '#0284c7' },
+      { key: 'Google Ads', label: '2. Quảng cáo Google Ads', shortLabel: 'Google Ads', color: '#d97706' },
+      { key: 'SaaS', label: '3. Xây dựng Tool SaaS', shortLabel: 'Tool SaaS', color: '#4f46e5' },
+      { key: 'SEO', label: '4. Tối ưu & Kế hoạch SEO', shortLabel: 'SEO', color: '#059669' }
+    ];
+
+    const DATA = [
+      // Website / Landing Page
+      { cat: 'Website', task: 'Đổi chữ, thay ảnh, chỉnh màu, thêm nút CTA, sửa CSS nhỏ', model: 'Hydrogen', level: 'Medium', reason: 'Tác vụ rõ ràng, sửa tức thì, tiết kiệm hạn mức.' },
+      { cat: 'Website', task: 'Nén/resize ảnh WebP, dọn file rác dự án, đổi tên file hàng loạt', model: 'Hydrogen', level: 'Medium', reason: 'Việc lặp lại, chỉ cần chạy nhanh và đúng lệnh.' },
+      { cat: 'Website', task: 'Dựng Landing Page / Website mới từ brief hoặc mẫu đã chốt', model: 'Neon', level: 'Medium', reason: 'Cân bằng tốt giữa thẩm mỹ UI, responsive và tốc độ code.' },
+      { cat: 'Website', task: 'Chuyển HTML sang WordPress Theme, dựng trang Gutenberg', model: 'Neon', level: 'Medium', reason: 'Xử lý nhiều file liên kết ổn định, ít vỡ cấu trúc.' },
+      { cat: 'Website', task: 'Audit UI/UX, kiểm tra responsive Mobile/Desktop, cài GA4/Clarity', model: 'Neon', level: 'High', reason: 'Cần soi kỹ lỗi giao diện và gắn mã đo lường chính xác.' },
+      { cat: 'Website', task: 'Audit CRO toàn diện website trước khi chạy Ads, đề xuất tái cấu trúc lớn', model: 'Argon', level: 'Medium', reason: 'Argon mức Medium đã phân tích sâu hành trình và điểm nghẽn.' },
+      { cat: 'Website', task: 'Xử lý lỗi tốc độ / Core Web Vitals phức tạp, diệt mã độc / bảo mật web', model: 'Argon', level: 'High', reason: 'Đụng hệ thống đang chạy, cần chẩn đoán gốc tránh lỗi web.' },
+
+      // Google Ads
+      { cat: 'Google Ads', task: 'Lọc sơ bộ danh sách cụm từ tìm kiếm (Search Terms) rác dễ thấy', model: 'Hydrogen', level: 'Medium', reason: 'Xử lý danh sách dài nhanh, chi phí thấp.' },
+      { cat: 'Google Ads', task: 'Viết thêm biến thể tiêu đề / mô tả (RSA) từ khung thông điệp đã chốt', model: 'Hydrogen', level: 'Medium', reason: 'Tạo nhiều phiên bản nhanh để chọn lọc.' },
+      { cat: 'Google Ads', task: 'Phân nhóm từ khóa STAG, chia phễu TOFU / MOFU / BOFU', model: 'Neon', level: 'Medium', reason: 'Đọc bảng dữ liệu và phân loại ý định tìm kiếm (Intent) rất chắc.' },
+      { cat: 'Google Ads', task: 'Lập kế hoạch ngân sách, dự báo KPI, viết bộ Assets chuẩn Editor', model: 'Neon', level: 'Medium', reason: 'Tính toán logic tốt, giữ đúng định dạng bảng biểu và kỹ thuật.' },
+      { cat: 'Google Ads', task: 'Xây phủ định chéo (Campaign / Ad Group) chống tự cắn traffic', model: 'Neon', level: 'High', reason: 'Suy nghĩ kỹ logic chéo để tránh phủ định nhầm từ khóa ra đơn.' },
+      { cat: 'Google Ads', task: 'Kiểm định (Post-Audit) tài khoản, bắt bệnh tụt chuyển đổi / CPA tăng', model: 'Argon', level: 'High', reason: 'Liên quan trực tiếp tới ngân sách, cần tổng hợp đa lớp dữ liệu.' },
+      { cat: 'Google Ads', task: 'Giải quyết xung đột chiến dịch phức tạp hoặc xây chiến lược từ con số 0', model: 'Argon', level: 'Medium', reason: 'Suy luận sâu, giảm tối đa rủi ro đốt ngân sách.' },
+
+      // Tool SaaS
+      { cat: 'SaaS', task: 'Viết component UI đơn giản, tạo dữ liệu mẫu, viết chú thích ngắn', model: 'Hydrogen', level: 'Medium', reason: 'Nhanh gọn, không cần suy luận phức tạp.' },
+      { cat: 'SaaS', task: 'Sửa lỗi nhỏ đã rõ dòng code và nguyên nhân', model: 'Hydrogen', level: 'Medium', reason: 'Sửa dứt điểm ngay, tiết kiệm thời gian chờ.' },
+      { cat: 'SaaS', task: 'Code tính năng mới (Frontend + Backend), nối API, viết test TDD', model: 'Neon', level: 'Medium', reason: 'Điểm ngọt cho lập trình thực chiến, viết code sạch và ổn định.' },
+      { cat: 'SaaS', task: 'Review code, kiểm tra lỗi UI/UX do AI tạo, refactor mức vừa', model: 'Neon', level: 'High', reason: 'Rà kỹ bug ẩn và logic liên kết trên nhiều file cùng lúc.' },
+      { cat: 'SaaS', task: 'Thiết kế kiến trúc hệ thống, chọn Design Pattern, thiết kế Database', model: 'Argon', level: 'Medium', reason: 'Quyết định nền tảng ngay từ đầu, tránh phải đập đi làm lại.' },
+      { cat: 'SaaS', task: 'Debug lỗi hóc búa (xung đột luồng, rò rỉ hiệu năng) mà Neon chưa gỡ được', model: 'Argon', level: 'High', reason: 'Đào sâu nguyên nhân gốc qua nhiều tầng mã nguồn.' },
+      { cat: 'SaaS', task: 'Quét bảo mật (OWASP), kiểm toán luồng thanh toán / phân quyền trước deploy', model: 'Argon', level: 'High', reason: 'Cần độ khắt khe tối đa để không lọt lỗ hổng nghiêm trọng.' },
+
+      // SEO
+      { cat: 'SEO', task: 'Viết Meta Title/Description, Alt ảnh, tóm tắt bài, chỉnh văn phong ngắn', model: 'Hydrogen', level: 'Medium', reason: 'Tác vụ khối lượng lớn, cần tốc độ cao.' },
+      { cat: 'SEO', task: 'Kiểm tra nhanh chuẩn Yoast / On-page cơ bản cho từng bài viết', model: 'Hydrogen', level: 'Medium', reason: 'Tiêu chí rõ ràng, đối chiếu rất nhanh.' },
+      { cat: 'SEO', task: 'Nghiên cứu Seed Keyword, gom Topic Cluster, lập Content Plan / Outline', model: 'Neon', level: 'Medium', reason: 'Hiểu tốt cấu trúc chủ đề, hạn chế ăn thịt từ khóa.' },
+      { cat: 'SEO', task: 'Lập bảng báo giá SEO, tính khối lượng công việc và tạo Proposal HTML', model: 'Neon', level: 'Medium', reason: 'Xử lý tốt cả logic tính toán lẫn định dạng đầu ra đẹp.' },
+      { cat: 'SEO', task: 'Kiểm tra nội dung chuẩn SEO Funnel, tối ưu GEO / AI Search (llms.txt)', model: 'Neon', level: 'High', reason: 'Chấm điểm chi tiết và đề xuất sửa chuẩn chuyên sâu.' },
+      { cat: 'SEO', task: 'Audit Technical SEO toàn diện (crawl, index, schema, JS rendering)', model: 'Argon', level: 'Medium', reason: 'Nhiều biến số kỹ thuật, mức Medium phân loại P0–P3 rất chuẩn.' },
+      { cat: 'SEO', task: 'Kiểm định (Audit) toàn bộ Plan SEO lớn hoặc gỡ án phạt / tụt traffic nặng', model: 'Argon', level: 'High', reason: 'Rủi ro cao, cần đối chiếu đa chiều kỹ lưỡng nhất.' }
+    ];
+
+    const MODE_DESCRIPTIONS = {
+      pa1: '<strong>PA 1 (Khuyên dùng):</strong> Tách thành 4 bảng riêng xếp dọc, giữ đủ cột Lý do; khi tìm kiếm sẽ tự ẩn bảng không có kết quả.',
+      pa2: '<strong>PA 2 (Lưới 2×2):</strong> Xem trọn 4 mảng trên 1 màn hình máy tính, ít phải cuộn chuột; ô trống tự ẩn khi lọc.',
+      pa3: '<strong>PA 3 (Tab + Search toàn cục):</strong> Bình thường chỉ hiện 1 mảng cho gọn; ngay khi gõ tìm kiếm sẽ tự quét xuyên suốt cả 4 mảng.'
+    };
+
+    const badgeMap = {
+      Hydrogen: '<span class="badge badge-hydro">Hydrogen</span>',
+      Neon: '<span class="badge badge-neon">Neon</span>',
+      Argon: '<span class="badge badge-argon">Argon</span>'
+    };
+
+    let activeMode = 'pa1';
+    let activeTab = 'Website';
+    let activeModel = 'all';
+    let activeLevel = 'all';
+    let searchTerm = '';
+
+    const viewContainer = document.getElementById('viewContainer');
+    const countInfo = document.getElementById('countInfo');
+    const searchInput = document.getElementById('searchInput');
+    const clearSearchBtn = document.getElementById('clearSearchBtn');
+    const modeDesc = document.getElementById('modeDesc');
+
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function escapeRegex(str) {
+      return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    function highlightText(text, query) {
+      const safe = escapeHtml(text);
+      if (!query) return safe;
+      const re = new RegExp(`(${escapeRegex(query)})`, 'gi');
+      return safe.replace(re, '<mark>$1</mark>');
+    }
+
+    function renderModelWithLevel(model, level) {
+      const levelClass = level === 'High' ? 'level-high' : 'level-medium';
+      return `<div class="model-stack">${badgeMap[model]}<span class="level-pill ${levelClass}">${level}</span></div>`;
+    }
+
+    function getFilteredData() {
+      const q = searchTerm.trim().toLowerCase();
+      return DATA.filter(item => {
+        const matchModel = activeModel === 'all' || item.model === activeModel;
+        const matchLevel = activeLevel === 'all' || item.level === activeLevel;
+        const catMeta = CATEGORIES.find(c => c.key === item.cat);
+        const matchSearch =
+          !q ||
+          item.task.toLowerCase().includes(q) ||
+          item.reason.toLowerCase().includes(q) ||
+          item.model.toLowerCase().includes(q) ||
+          item.level.toLowerCase().includes(q) ||
+          catMeta.label.toLowerCase().includes(q);
+        return matchModel && matchLevel && matchSearch;
+      });
+    }
+
+    function renderCategoryTable(catMeta, items, query) {
+      return `
+        <section class="cat-section" style="border-left-color: ${catMeta.color};">
+          <div class="cat-header">
+            <span class="cat-title">${catMeta.label}</span>
+            <span class="cat-count">${items.length} tác vụ</span>
+          </div>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 44%;">Tác vụ cụ thể</th>
+                  <th style="width: 22%;">Model &amp; Mức suy nghĩ</th>
+                  <th style="width: 34%;">Lý do chọn</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${items
+                  .map(
+                    item => `
+                    <tr>
+                      <td data-label="Tác vụ cụ thể">${highlightText(item.task, query)}</td>
+                      <td data-label="Model & Mức suy nghĩ">${renderModelWithLevel(item.model, item.level)}</td>
+                      <td data-label="Lý do">${highlightText(item.reason, query)}</td>
+                    </tr>
+                  `
+                  )
+                  .join('')}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      `;
+    }
+
+    function renderPA1(filtered, query) {
+      const sections = CATEGORIES.map(cat => {
+        const items = filtered.filter(i => i.cat === cat.key);
+        return items.length ? renderCategoryTable(cat, items, query) : '';
+      }).filter(Boolean);
+
+      if (!sections.length) {
+        return '<div class="empty-state">Không tìm thấy tác vụ phù hợp. Thử xóa từ khóa tìm kiếm hoặc chọn "Tất cả".</div>';
+      }
+      return `<div class="stack-list">${sections.join('')}</div>`;
+    }
+
+    function renderPA2(filtered, query) {
+      const panels = CATEGORIES.map(cat => {
+        const items = filtered.filter(i => i.cat === cat.key);
+        if (!items.length) return '';
+        return `
+          <section class="cat-section" style="border-left-color: ${cat.color};">
+            <div class="cat-header">
+              <span class="cat-title">${cat.label}</span>
+              <span class="cat-count">${items.length} tác vụ</span>
+            </div>
+            <div class="grid-list">
+              ${items
+                .map(
+                  item => `
+                  <div class="grid-item">
+                    <div class="grid-item-top">
+                      <span class="grid-task">${highlightText(item.task, query)}</span>
+                      ${renderModelWithLevel(item.model, item.level)}
+                    </div>
+                    <div class="grid-reason">${highlightText(item.reason, query)}</div>
+                  </div>
+                `
+                )
+                .join('')}
+            </div>
+          </section>
+        `;
+      }).filter(Boolean);
+
+      if (!panels.length) {
+        return '<div class="empty-state">Không tìm thấy tác vụ phù hợp. Thử xóa từ khóa tìm kiếm hoặc chọn "Tất cả".</div>';
+      }
+      return `<div class="grid-2x2">${panels.join('')}</div>`;
+    }
+
+    function renderPA3(filtered, query) {
+      const isGlobalSearch = Boolean(query);
+      const tabBar = `
+        <div class="tab-bar" id="pa3TabBar">
+          ${CATEGORIES.map(cat => {
+            const count = filtered.filter(i => i.cat === cat.key).length;
+            const isActive = !isGlobalSearch && activeTab === cat.key;
+            return `
+              <button class="cat-tab ${isActive ? 'active' : ''}" data-tab="${cat.key}">
+                <span>${cat.shortLabel}</span>
+                <span class="tab-badge">${count}</span>
+              </button>
+            `;
+          }).join('')}
+        </div>
+      `;
+
+      if (isGlobalSearch) {
+        const notice = `
+          <div class="global-notice">
+            <span>Đang tìm xuyên suốt cả 4 mảng cho từ khóa <strong>"${escapeHtml(query)}"</strong> (${filtered.length} kết quả).</span>
+            <button type="button" class="pill" id="resetPa3Search">Quay lại Tab</button>
+          </div>
+        `;
+        const sections = CATEGORIES.map(cat => {
+          const items = filtered.filter(i => i.cat === cat.key);
+          return items.length ? renderCategoryTable(cat, items, query) : '';
+        }).filter(Boolean);
+
+        const body = sections.length
+          ? `<div class="stack-list">${sections.join('')}</div>`
+          : '<div class="empty-state">Không tìm thấy tác vụ phù hợp trên cả 4 mảng.</div>';
+
+        return tabBar + notice + body;
+      }
+
+      const activeCatMeta = CATEGORIES.find(c => c.key === activeTab);
+      const tabItems = filtered.filter(i => i.cat === activeTab);
+      const body = tabItems.length
+        ? renderCategoryTable(activeCatMeta, tabItems, '')
+        : '<div class="empty-state">Mảng này không có tác vụ khớp với bộ lọc Model/Mức hiện tại.</div>';
+
+      return tabBar + body;
+    }
+
+    function render() {
+      const query = searchTerm.trim();
+      const filtered = getFilteredData();
+      countInfo.textContent = `Hiển thị ${filtered.length} / ${DATA.length} tác vụ`;
+      clearSearchBtn.classList.toggle('visible', query.length > 0);
+
+      if (activeMode === 'pa1') {
+        viewContainer.innerHTML = renderPA1(filtered, query);
+      } else if (activeMode === 'pa2') {
+        viewContainer.innerHTML = renderPA2(filtered, query);
+      } else {
+        viewContainer.innerHTML = renderPA3(filtered, query);
+      }
+    }
+
+    document.getElementById('modeSwitcher').addEventListener('click', e => {
+      const btn = e.target.closest('.mode-btn');
+      if (!btn) return;
+      document.querySelectorAll('#modeSwitcher .mode-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeMode = btn.dataset.mode;
+      modeDesc.innerHTML = MODE_DESCRIPTIONS[activeMode];
+      render();
+    });
+
+    document.getElementById('modelFilters').addEventListener('click', e => {
+      const btn = e.target.closest('.pill');
+      if (!btn) return;
+      document.querySelectorAll('#modelFilters .pill').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      activeModel = btn.dataset.model;
+      render();
+    });
+
+    document.getElementById('levelFilters').addEventListener('click', e => {
+      const btn = e.target.closest('.pill');
+      if (!btn) return;
+      document.querySelectorAll('#levelFilters .pill').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      activeLevel = btn.dataset.level;
+      render();
+    });
+
+    searchInput.addEventListener('input', e => {
+      searchTerm = e.target.value;
+      render();
+    });
+
+    clearSearchBtn.addEventListener('click', () => {
+      searchTerm = '';
+      searchInput.value = '';
+      render();
+      searchInput.focus();
+    });
+
+    viewContainer.addEventListener('click', e => {
+      const tabBtn = e.target.closest('.cat-tab');
+      if (tabBtn) {
+        activeTab = tabBtn.dataset.tab;
+        if (searchTerm.trim()) {
+          searchTerm = '';
+          searchInput.value = '';
+        }
+        render();
+        return;
+      }
+      if (e.target.id === 'resetPa3Search') {
+        searchTerm = '';
+        searchInput.value = '';
+        render();
+      }
+    });
+
+    render();
+  </script>
+</body>
+</html>
