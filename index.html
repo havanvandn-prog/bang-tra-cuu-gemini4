@@ -370,21 +370,21 @@
           <span class="card-title">Gemini 4 Hydrogen</span>
           <span class="badge badge-hydro">Nhanh · Tiết kiệm</span>
         </div>
-        <p>Việc nhỏ, rõ đầu việc, sửa vặt, chạy lặp số lượng lớn, không cần suy luận nhiều tầng.</p>
+        <p>Dùng cho việc nhỏ, sửa vặt, chạy lặp số lượng lớn. Mặc định chọn mức <strong>Medium</strong>.</p>
       </div>
       <div class="card">
         <div class="card-head">
           <span class="card-title">Gemini 4 Neon</span>
           <span class="badge badge-neon">Mặc định · Cân bằng</span>
         </div>
-        <p>Chọn đầu tiên cho 80% công việc chuyên môn. Code, xử lý bảng biểu và làm nội dung ổn định.</p>
+        <p>Chọn đầu tiên cho 80% công việc (<strong>Medium</strong>). Nâng lên <strong>High</strong> khi soi kỹ lỗi hoặc logic chéo.</p>
       </div>
       <div class="card">
         <div class="card-head">
           <span class="card-title">Gemini 4 Argon</span>
           <span class="badge badge-argon">Chuyên sâu · Hạng nặng</span>
         </div>
-        <p>Việc khó, ảnh hưởng trực tiếp tới ngân sách/kiến trúc, cần kiểm định khắt khe nhiều lớp.</p>
+        <p>Dùng cho chiến lược, kiến trúc (<strong>Medium</strong>). Bật <strong>High</strong> khi xử lý bảo mật, tiền Ads hoặc lỗi sâu.</p>
       </div>
     </section>
 
@@ -413,7 +413,7 @@
           <button class="pill" data-model="Argon">Argon</button>
         </div>
         <div class="pill-group" id="levelFilters">
-          <button class="pill active" data-level="all">Mọi mức</button>
+          <button class="pill active" data-level="all">Tất cả mức</button>
           <button class="pill" data-level="Medium">Medium</button>
           <button class="pill" data-level="High">High</button>
         </div>
@@ -425,25 +425,25 @@
         <thead>
           <tr>
             <th>Lĩnh vực</th>
-            <th>Tác vụ cụ thể</th>
-            <th>Model &amp; Mức suy nghĩ</th>
-            <th>Lý do chọn</th>
+            <th>Công việc cần làm</th>
+            <th>Model &amp; Mức</th>
+            <th>Vì sao chọn</th>
           </tr>
         </thead>
         <tbody id="tableBody"></tbody>
       </table>
       <div id="emptyState" class="empty-state" style="display: none;">
-        Không tìm thấy tác vụ phù hợp. Thử xóa từ khóa tìm kiếm hoặc chọn "Tất cả".
+        Không tìm thấy công việc phù hợp. Thử xóa từ khóa hoặc chọn "Tất cả".
       </div>
     </div>
 
     <section class="rules">
       <h2>Quy tắc nhớ nhanh (Model &amp; Mức Medium / High)</h2>
       <ol>
-        <li><strong>Mặc định mở việc mới bằng Neon (Medium).</strong></li>
-        <li><strong>Hạ xuống Hydrogen (Medium)</strong> khi chuyển sang sửa vặt, chạy hàng loạt hoặc viết nội dung ngắn.</li>
-        <li><strong>Đẩy lên Argon</strong> khi chốt kiến trúc/chiến lược lớn hoặc kiểm định (audit) gắt trước khi giao khách/deploy.</li>
-        <li><strong>Khi nào chọn Medium vs High:</strong> Giữ <strong>Medium</strong> cho 80% việc dựng, viết và lập kế hoạch. Chỉ bật <strong>High</strong> khi kiểm toán rủi ro cao (bảo mật, tiền quảng cáo, phủ định chéo, gỡ lỗi sâu).</li>
+        <li><strong>Mở việc mới:</strong> Chọn <strong>Neon (Medium)</strong> làm mặc định.</li>
+        <li><strong>Việc lặp, sửa vặt:</strong> Hạ xuống <strong>Hydrogen (Medium)</strong> để làm nhanh, tiết kiệm hạn mức.</li>
+        <li><strong>Việc lớn, độ khó cao:</strong> Đẩy lên <strong>Argon (Medium)</strong> khi chốt chiến lược hoặc kiến trúc.</li>
+        <li><strong>Khi nào bật High:</strong> Chỉ bật <strong>High</strong> cho việc rủi ro cao (bảo mật, tiền Ads, phủ định chéo, gỡ lỗi sâu).</li>
       </ol>
     </section>
   </div>
@@ -451,40 +451,40 @@
   <script>
     const DATA = [
       // Website / Landing Page
-      { cat: 'Website', task: 'Đổi chữ, thay ảnh, chỉnh màu, thêm nút CTA, sửa CSS nhỏ', model: 'Hydrogen', level: 'Medium', reason: 'Tác vụ rõ ràng, sửa tức thì, tiết kiệm hạn mức.' },
-      { cat: 'Website', task: 'Nén/resize ảnh WebP, dọn file rác dự án, đổi tên file hàng loạt', model: 'Hydrogen', level: 'Medium', reason: 'Việc lặp lại, chỉ cần chạy nhanh và đúng lệnh.' },
-      { cat: 'Website', task: 'Dựng Landing Page / Website mới từ brief hoặc mẫu đã chốt', model: 'Neon', level: 'Medium', reason: 'Cân bằng tốt giữa thẩm mỹ UI, responsive và tốc độ code.' },
-      { cat: 'Website', task: 'Chuyển HTML sang WordPress Theme, dựng trang Gutenberg', model: 'Neon', level: 'Medium', reason: 'Xử lý nhiều file liên kết ổn định, ít vỡ cấu trúc.' },
-      { cat: 'Website', task: 'Audit UI/UX, kiểm tra responsive Mobile/Desktop, cài GA4/Clarity', model: 'Neon', level: 'High', reason: 'Cần soi kỹ lỗi giao diện và gắn mã đo lường chính xác.' },
-      { cat: 'Website', task: 'Audit CRO toàn diện website trước khi chạy Ads, đề xuất tái cấu trúc lớn', model: 'Argon', level: 'Medium', reason: 'Argon mức Medium đã phân tích sâu hành trình và điểm nghẽn.' },
-      { cat: 'Website', task: 'Xử lý lỗi tốc độ / Core Web Vitals phức tạp, diệt mã độc / bảo mật web', model: 'Argon', level: 'High', reason: 'Đụng hệ thống đang chạy, cần chẩn đoán gốc tránh lỗi web.' },
+      { cat: 'Website', task: 'Đổi chữ, thay ảnh, chỉnh màu, thêm nút CTA, sửa CSS nhỏ', model: 'Hydrogen', level: 'Medium', reason: 'Đầu việc rõ ràng, sửa ngay tức thì, tiết kiệm hạn mức.' },
+      { cat: 'Website', task: 'Nén ảnh WebP, dọn file rác, đổi tên file hàng loạt', model: 'Hydrogen', level: 'Medium', reason: 'Việc lặp lại, chỉ cần chạy nhanh và đúng lệnh.' },
+      { cat: 'Website', task: 'Dựng Landing Page / Website mới từ brief hoặc mẫu đã chốt', model: 'Neon', level: 'Medium', reason: 'Cân bằng tốt giữa thẩm mỹ, hiển thị di động và tốc độ code.' },
+      { cat: 'Website', task: 'Chuyển HTML sang WordPress Theme, dựng trang Gutenberg', model: 'Neon', level: 'Medium', reason: 'Xử lý nhiều file liên kết ổn định, ít vỡ bố cục.' },
+      { cat: 'Website', task: 'Kiểm tra giao diện (Mobile/Desktop), cài đo lường GA4/Clarity', model: 'Neon', level: 'High', reason: 'Soi kỹ lỗi hiển thị và gắn mã đo lường chính xác.' },
+      { cat: 'Website', task: 'Kiểm tra tối ưu chuyển đổi (CRO) toàn web trước khi chạy Ads', model: 'Argon', level: 'Medium', reason: 'Phân tích sâu hành trình khách hàng để tìm điểm rớt đơn.' },
+      { cat: 'Website', task: 'Sửa lỗi tốc độ nặng (Core Web Vitals), diệt mã độc, bảo mật web', model: 'Argon', level: 'High', reason: 'Đụng hệ thống đang chạy, cần tìm đúng nguyên nhân gốc tránh sập web.' },
 
       // Google Ads
-      { cat: 'Google Ads', task: 'Lọc sơ bộ danh sách cụm từ tìm kiếm (Search Terms) rác dễ thấy', model: 'Hydrogen', level: 'Medium', reason: 'Xử lý danh sách dài nhanh, chi phí thấp.' },
-      { cat: 'Google Ads', task: 'Viết thêm biến thể tiêu đề / mô tả (RSA) từ khung thông điệp đã chốt', model: 'Hydrogen', level: 'Medium', reason: 'Tạo nhiều phiên bản nhanh để chọn lọc.' },
-      { cat: 'Google Ads', task: 'Phân nhóm từ khóa STAG, chia phễu TOFU / MOFU / BOFU', model: 'Neon', level: 'Medium', reason: 'Đọc bảng dữ liệu và phân loại ý định tìm kiếm (Intent) rất chắc.' },
-      { cat: 'Google Ads', task: 'Lập kế hoạch ngân sách, dự báo KPI, viết bộ Assets chuẩn Editor', model: 'Neon', level: 'Medium', reason: 'Tính toán logic tốt, giữ đúng định dạng bảng biểu và kỹ thuật.' },
-      { cat: 'Google Ads', task: 'Xây phủ định chéo (Campaign / Ad Group) chống tự cắn traffic', model: 'Neon', level: 'High', reason: 'Suy nghĩ kỹ logic chéo để tránh phủ định nhầm từ khóa ra đơn.' },
-      { cat: 'Google Ads', task: 'Kiểm định (Post-Audit) tài khoản, bắt bệnh tụt chuyển đổi / CPA tăng', model: 'Argon', level: 'High', reason: 'Liên quan trực tiếp tới ngân sách, cần tổng hợp đa lớp dữ liệu.' },
-      { cat: 'Google Ads', task: 'Giải quyết xung đột chiến dịch phức tạp hoặc xây chiến lược từ con số 0', model: 'Argon', level: 'Medium', reason: 'Suy luận sâu, giảm tối đa rủi ro đốt ngân sách.' },
+      { cat: 'Google Ads', task: 'Lọc nhanh cụm từ tìm kiếm (Search Terms) rác dễ thấy', model: 'Hydrogen', level: 'Medium', reason: 'Xử lý danh sách dài nhanh, chi phí thấp.' },
+      { cat: 'Google Ads', task: 'Viết thêm mẫu tiêu đề, mô tả quảng cáo (RSA) từ khung đã chốt', model: 'Hydrogen', level: 'Medium', reason: 'Tạo nhiều phiên bản nhanh để chọn lọc.' },
+      { cat: 'Google Ads', task: 'Chia nhóm từ khóa (STAG) theo phễu khách hàng (TOFU / MOFU / BOFU)', model: 'Neon', level: 'Medium', reason: 'Đọc bảng dữ liệu và phân loại ý định tìm kiếm rất chắc.' },
+      { cat: 'Google Ads', task: 'Lập kế hoạch ngân sách, dự báo KPI, viết bộ tiện ích (Assets)', model: 'Neon', level: 'Medium', reason: 'Tính toán logic tốt, giữ đúng định dạng bảng biểu.' },
+      { cat: 'Google Ads', task: 'Tạo từ khóa phủ định chéo để các nhóm không tự cạnh tranh nhau', model: 'Neon', level: 'High', reason: 'Tính kỹ logic chéo để tránh chặn nhầm từ khóa ra đơn.' },
+      { cat: 'Google Ads', task: 'Kiểm tra toàn diện tài khoản, tìm nguyên nhân tụt đơn hoặc tăng giá/khách (CPA)', model: 'Argon', level: 'High', reason: 'Liên quan trực tiếp tới tiền quảng cáo, cần đối chiếu nhiều lớp dữ liệu.' },
+      { cat: 'Google Ads', task: 'Gỡ xung đột chiến dịch phức tạp hoặc lập chiến lược từ đầu', model: 'Argon', level: 'Medium', reason: 'Suy luận sâu, giảm tối đa rủi ro đốt ngân sách.' },
 
       // Tool SaaS
-      { cat: 'SaaS', task: 'Viết component UI đơn giản, tạo dữ liệu mẫu, viết chú thích ngắn', model: 'Hydrogen', level: 'Medium', reason: 'Nhanh gọn, không cần suy luận phức tạp.' },
+      { cat: 'SaaS', task: 'Tạo thành phần giao diện (UI) đơn giản, dữ liệu mẫu, chú thích ngắn', model: 'Hydrogen', level: 'Medium', reason: 'Nhanh gọn, không cần suy luận phức tạp.' },
       { cat: 'SaaS', task: 'Sửa lỗi nhỏ đã rõ dòng code và nguyên nhân', model: 'Hydrogen', level: 'Medium', reason: 'Sửa dứt điểm ngay, tiết kiệm thời gian chờ.' },
-      { cat: 'SaaS', task: 'Code tính năng mới (Frontend + Backend), nối API, viết test TDD', model: 'Neon', level: 'Medium', reason: 'Điểm ngọt cho lập trình thực chiến, viết code sạch và ổn định.' },
-      { cat: 'SaaS', task: 'Review code, kiểm tra lỗi UI/UX do AI tạo, refactor mức vừa', model: 'Neon', level: 'High', reason: 'Rà kỹ bug ẩn và logic liên kết trên nhiều file cùng lúc.' },
-      { cat: 'SaaS', task: 'Thiết kế kiến trúc hệ thống, chọn Design Pattern, thiết kế Database', model: 'Argon', level: 'Medium', reason: 'Quyết định nền tảng ngay từ đầu, tránh phải đập đi làm lại.' },
-      { cat: 'SaaS', task: 'Debug lỗi hóc búa (xung đột luồng, rò rỉ hiệu năng) mà Neon chưa gỡ được', model: 'Argon', level: 'High', reason: 'Đào sâu nguyên nhân gốc qua nhiều tầng mã nguồn.' },
-      { cat: 'SaaS', task: 'Quét bảo mật (OWASP), kiểm toán luồng thanh toán / phân quyền trước deploy', model: 'Argon', level: 'High', reason: 'Cần độ khắt khe tối đa để không lọt lỗ hổng nghiêm trọng.' },
+      { cat: 'SaaS', task: 'Lập trình tính năng mới (giao diện + máy chủ), nối API, viết test', model: 'Neon', level: 'Medium', reason: 'Điểm cân bằng tốt nhất để viết code sạch, chạy ổn định.' },
+      { cat: 'SaaS', task: 'Kiểm tra lại code, soi lỗi giao diện do AI tạo, dọn gọn code', model: 'Neon', level: 'High', reason: 'Rà kỹ lỗi ẩn và sự liên kết giữa nhiều file cùng lúc.' },
+      { cat: 'SaaS', task: 'Thiết kế kiến trúc hệ thống, cấu trúc dữ liệu (Database)', model: 'Argon', level: 'Medium', reason: 'Chốt nền tảng vững ngay từ đầu để tránh phải đập đi làm lại.' },
+      { cat: 'SaaS', task: 'Tìm và sửa lỗi nặng (xung đột, chậm hệ thống) mà Neon chưa gỡ được', model: 'Argon', level: 'High', reason: 'Đào sâu nguyên nhân gốc qua nhiều tầng mã nguồn.' },
+      { cat: 'SaaS', task: 'Kiểm tra bảo mật (OWASP), rà soát thanh toán và phân quyền trước khi đưa lên mạng', model: 'Argon', level: 'High', reason: 'Cần độ khắt khe tối đa để không lọt lỗ hổng nghiêm trọng.' },
 
       // SEO
       { cat: 'SEO', task: 'Viết Meta Title/Description, Alt ảnh, tóm tắt bài, chỉnh văn phong ngắn', model: 'Hydrogen', level: 'Medium', reason: 'Tác vụ khối lượng lớn, cần tốc độ cao.' },
-      { cat: 'SEO', task: 'Kiểm tra nhanh chuẩn Yoast / On-page cơ bản cho từng bài viết', model: 'Hydrogen', level: 'Medium', reason: 'Tiêu chí rõ ràng, đối chiếu rất nhanh.' },
-      { cat: 'SEO', task: 'Nghiên cứu Seed Keyword, gom Topic Cluster, lập Content Plan / Outline', model: 'Neon', level: 'Medium', reason: 'Hiểu tốt cấu trúc chủ đề, hạn chế ăn thịt từ khóa.' },
-      { cat: 'SEO', task: 'Lập bảng báo giá SEO, tính khối lượng công việc và tạo Proposal HTML', model: 'Neon', level: 'Medium', reason: 'Xử lý tốt cả logic tính toán lẫn định dạng đầu ra đẹp.' },
-      { cat: 'SEO', task: 'Kiểm tra nội dung chuẩn SEO Funnel, tối ưu GEO / AI Search (llms.txt)', model: 'Neon', level: 'High', reason: 'Chấm điểm chi tiết và đề xuất sửa chuẩn chuyên sâu.' },
-      { cat: 'SEO', task: 'Audit Technical SEO toàn diện (crawl, index, schema, JS rendering)', model: 'Argon', level: 'Medium', reason: 'Nhiều biến số kỹ thuật, mức Medium phân loại P0–P3 rất chuẩn.' },
-      { cat: 'SEO', task: 'Kiểm định (Audit) toàn bộ Plan SEO lớn hoặc gỡ án phạt / tụt traffic nặng', model: 'Argon', level: 'High', reason: 'Rủi ro cao, cần đối chiếu đa chiều kỹ lưỡng nhất.' }
+      { cat: 'SEO', task: 'Kiểm tra nhanh chuẩn SEO bài viết (Yoast / On-page cơ bản)', model: 'Hydrogen', level: 'Medium', reason: 'Tiêu chí rõ ràng, đối chiếu rất nhanh.' },
+      { cat: 'SEO', task: 'Tìm từ khóa gốc, gom nhóm chủ đề (Topic Cluster), lập dàn ý bài viết', model: 'Neon', level: 'Medium', reason: 'Hiểu rõ cấu trúc chủ đề, tránh viết trùng lặp ý giữa các bài.' },
+      { cat: 'SEO', task: 'Tính khối lượng công việc, lập bảng báo giá SEO và file trình bày HTML', model: 'Neon', level: 'Medium', reason: 'Xử lý tốt cả tính toán lẫn định dạng đầu ra đẹp.' },
+      { cat: 'SEO', task: 'Kiểm tra bài viết theo phễu chuyển đổi, tối ưu hiển thị trên AI Search (GEO)', model: 'Neon', level: 'High', reason: 'Chấm điểm chi tiết và đề xuất sửa chuẩn chuyên sâu.' },
+      { cat: 'SEO', task: 'Kiểm tra kỹ thuật SEO toàn diện (thu thập dữ liệu, lập chỉ mục, Schema)', model: 'Argon', level: 'Medium', reason: 'Nhiều yếu tố kỹ thuật đan xen, mức Medium phân loại P0–P3 rất chuẩn.' },
+      { cat: 'SEO', task: 'Kiểm định kế hoạch SEO lớn hoặc xử lý web bị tụt traffic nặng / án phạt', model: 'Argon', level: 'High', reason: 'Rủi ro cao, cần đối chiếu đa chiều kỹ lưỡng nhất.' }
     ];
 
     let activeCat = 'all';
