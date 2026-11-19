@@ -899,9 +899,9 @@
       return safe.replace(re, '<mark>$1</mark>');
     }
 
-    function renderModelWithLevel(model, level) {
+    function renderLevelBadge(level) {
       const levelClass = level === 'High' ? 'level-high' : 'level-medium';
-      return `<div class="model-stack">${badgeMap[model]}<span class="level-pill ${levelClass}">${level}</span></div>`;
+      return `<span class="level-pill ${levelClass}">${level}</span>`;
     }
 
     function render() {
@@ -943,9 +943,10 @@
               <table>
                 <thead>
                   <tr>
-                    <th style="width: 44%;">Công việc cần làm</th>
-                    <th style="width: 22%;">Model &amp; Mức</th>
-                    <th style="width: 34%;">Vì sao chọn</th>
+                    <th style="width: 40%;">Công việc cần làm</th>
+                    <th style="width: 14%;">Model</th>
+                    <th style="width: 14%;">Mức suy nghĩ</th>
+                    <th style="width: 32%;">Vì sao chọn</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -954,7 +955,8 @@
                       item => `
                       <tr>
                         <td data-label="Công việc" class="task-text">${highlightText(item.task, query)}</td>
-                        <td data-label="Model & Mức">${renderModelWithLevel(item.model, item.level)}</td>
+                        <td data-label="Model">${badgeMap[item.model]}</td>
+                        <td data-label="Mức suy nghĩ">${renderLevelBadge(item.level)}</td>
                         <td data-label="Lý do" class="reason-text">${highlightText(item.reason, query)}</td>
                       </tr>
                     `

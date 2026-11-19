@@ -426,7 +426,8 @@
           <tr>
             <th>Lĩnh vực</th>
             <th>Công việc cần làm</th>
-            <th>Model &amp; Mức</th>
+            <th>Model</th>
+            <th>Mức suy nghĩ</th>
             <th>Vì sao chọn</th>
           </tr>
         </thead>
@@ -498,9 +499,9 @@
       Argon: '<span class="badge badge-argon">Argon</span>'
     };
 
-    function renderModelWithLevel(model, level) {
+    function renderLevelBadge(level) {
       const levelClass = level === 'High' ? 'level-high' : 'level-medium';
-      return `<div class="model-stack">${badgeMap[model]}<span class="level-pill ${levelClass}">${level}</span></div>`;
+      return `<span class="level-pill ${levelClass}">${level}</span>`;
     }
 
     const catLabelMap = {
@@ -545,8 +546,9 @@
           item => `
           <tr>
             <td data-label="Lĩnh vực"><span class="cat-tag">${catLabelMap[item.cat]}</span></td>
-            <td data-label="Tác vụ cụ thể">${item.task}</td>
-            <td data-label="Model & Mức suy nghĩ">${renderModelWithLevel(item.model, item.level)}</td>
+            <td data-label="Công việc cần làm">${item.task}</td>
+            <td data-label="Model">${badgeMap[item.model]}</td>
+            <td data-label="Mức suy nghĩ">${renderLevelBadge(item.level)}</td>
             <td data-label="Lý do">${item.reason}</td>
           </tr>
         `
