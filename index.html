@@ -633,11 +633,11 @@
         </div>
         <div class="brand-text">
           <div class="brand-title">Bảng Tra Cứu Model Gemini 4</div>
-          <div class="brand-sub">Website · Google Ads · Tool SaaS · SEO</div>
+          <div class="brand-sub">Website · UI/UX · Google Ads · Tool SaaS · SEO</div>
         </div>
       </div>
       <div class="topbar-meta">
-        <span class="count-chip" id="countInfo">30 / 30 việc</span>
+        <span class="count-chip" id="countInfo">34 / 34 việc</span>
       </div>
     </div>
   </header>
@@ -656,7 +656,7 @@
               type="text"
               id="searchInput"
               class="search-input"
-              placeholder="Tìm nhanh công việc (ví dụ: STAG, báo giá, CSS, bảo mật...)"
+              placeholder="Tìm nhanh công việc (ví dụ: UI/UX, STAG, báo giá, CSS, bảo mật...)"
             />
             <button type="button" id="clearSearchBtn" class="clear-btn" aria-label="Xóa từ khóa">×</button>
           </div>
@@ -678,6 +678,13 @@
                 <path d="M2 12h20"></path>
               </svg>
               <span>Landing Page / Web</span>
+            </button>
+            <button class="pill" data-cat="UI/UX">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0">
+                <path d="M12 20h9"></path>
+                <path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"></path>
+              </svg>
+              <span>Tối ưu UI/UX</span>
             </button>
             <button class="pill" data-cat="Google Ads">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0">
@@ -791,18 +798,23 @@
         icon: '<svg class="cat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>'
       },
       {
+        key: 'UI/UX',
+        label: '2. Tối ưu UI/UX & Giao diện',
+        icon: '<svg class="cat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"></path></svg>'
+      },
+      {
         key: 'Google Ads',
-        label: '2. Quảng cáo Google Ads',
+        label: '3. Quảng cáo Google Ads',
         icon: '<svg class="cat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>'
       },
       {
         key: 'SaaS',
-        label: '3. Xây dựng Tool SaaS',
+        label: '4. Xây dựng Tool SaaS',
         icon: '<svg class="cat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"></path><rect width="16" height="12" x="4" y="8" rx="2"></rect><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M15 13v2"></path><path d="M9 13v2"></path></svg>'
       },
       {
         key: 'SEO',
-        label: '4. Tối ưu & Kế hoạch SEO',
+        label: '5. Tối ưu & Kế hoạch SEO',
         icon: '<svg class="cat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>'
       }
     ];
@@ -813,11 +825,17 @@
       { cat: 'Website', task: 'Nén ảnh WebP, dọn file rác, đổi tên file hàng loạt', model: 'Hydrogen', level: 'Medium', reason: 'Việc lặp lại, chỉ cần chạy nhanh và đúng lệnh.' },
       { cat: 'Website', task: 'Dựng Landing Page / Website mới từ brief hoặc mẫu đã chốt', model: 'Neon', level: 'Medium', reason: 'Cân bằng tốt giữa thẩm mỹ, hiển thị di động và tốc độ code.' },
       { cat: 'Website', task: 'Chuyển HTML sang WordPress Theme, dựng trang Gutenberg', model: 'Neon', level: 'Medium', reason: 'Xử lý nhiều file liên kết ổn định, ít vỡ bố cục.' },
-      { cat: 'Website', task: 'Gợi ý và gắn hiệu ứng cuộn trang mượt 60 FPS (GSAP) cho Landing Page / Web có sẵn', model: 'Neon', level: 'Medium', reason: 'Đề xuất hiệu ứng hợp từng section, giữ 60 FPS và không vỡ bố cục; bật High nếu làm hiệu ứng phức tạp trên React/Next.js.' },
-      { cat: 'Website', task: 'Kiểm tra giao diện (Mobile/Desktop), cài đo lường GA4/Clarity', model: 'Neon', level: 'High', reason: 'Soi kỹ lỗi hiển thị và gắn mã đo lường chính xác.' },
+      { cat: 'Website', task: 'Cài đo lường chuyển đổi (GA4, Microsoft Clarity, Google Ads Tracking)', model: 'Neon', level: 'High', reason: 'Gắn mã đo lường chính xác, tránh trùng sự kiện và không làm chậm web.' },
       { cat: 'Website', task: 'Lập phương án tối ưu web: đề xuất sitemap mới, các trang, section/nội dung và tính năng', model: 'Argon', level: 'Medium', reason: 'Chốt kiến trúc tổng thể và trải nghiệm khách hàng ngay từ đầu để tránh làm lại.' },
       { cat: 'Website', task: 'Kiểm tra tối ưu chuyển đổi (CRO) toàn web trước khi chạy Ads', model: 'Argon', level: 'Medium', reason: 'Phân tích sâu hành trình khách hàng để tìm điểm rớt đơn.' },
       { cat: 'Website', task: 'Sửa lỗi tốc độ nặng (Core Web Vitals), diệt mã độc, bảo mật web', model: 'Argon', level: 'High', reason: 'Đụng hệ thống đang chạy, cần tìm đúng nguyên nhân gốc tránh sập web.' },
+
+      // Tối ưu UI/UX & Giao diện
+      { cat: 'UI/UX', task: 'Đã chốt phương án UI, chỉ cần sửa code (đổi màu tag, thêm icon, chỉnh khoảng cách)', model: 'Hydrogen', level: 'Medium', reason: 'Đã rõ cách làm, ra lệnh thẳng để áp vào code nhanh và tiết kiệm hạn mức.' },
+      { cat: 'UI/UX', task: 'Nhìn ảnh giao diện, tư vấn phương án tối ưu cho 1 thành phần (tag, nút, thẻ, bộ lọc)', model: 'Neon', level: 'Medium', reason: 'Đề xuất 2–3 phương án có gu thẩm mỹ, hài hòa với nền hiện tại, tránh "màu AI".' },
+      { cat: 'UI/UX', task: 'Gợi ý và gắn hiệu ứng cuộn trang mượt 60 FPS (GSAP) cho Landing Page / Web', model: 'Neon', level: 'Medium', reason: 'Đề xuất hiệu ứng hợp từng section, giữ 60 FPS và không vỡ bố cục; bật High nếu làm hiệu ứng phức tạp trên React/Next.js.' },
+      { cat: 'UI/UX', task: 'Soi kỹ thị giác, độ tương phản và lỗi giao diện (Mobile/Desktop) từ ảnh chụp', model: 'Neon', level: 'High', reason: 'Bắt kỹ lỗi tương phản chữ, căn lề, trạng thái bấm và phân tích ưu/nhược điểm từng phương án.' },
+      { cat: 'UI/UX', task: 'Đập đi làm lại bố cục hoặc luồng trải nghiệm (UX) của cả trang', model: 'Argon', level: 'Medium', reason: 'Suy luận sâu về phân cấp thông tin và luồng thao tác toàn trang; không dùng Argon cho chi tiết nhỏ.' },
 
       // Google Ads
       { cat: 'Google Ads', task: 'Lọc nhanh cụm từ tìm kiếm (Search Terms) rác dễ thấy', model: 'Hydrogen', level: 'Medium', reason: 'Xử lý danh sách dài nhanh, chi phí thấp.' },
