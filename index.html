@@ -34,6 +34,9 @@
       --argon-bg: #fef3c7;
       --argon-text: #92400e;
       --argon-border: #fde68a;
+      --carbon-bg: #1e293b;
+      --carbon-text: #ffffff;
+      --carbon-border: #0f172a;
     }
 
     * {
@@ -430,6 +433,12 @@
       border: 1px solid var(--argon-border);
     }
 
+    .badge-carbon {
+      background: var(--carbon-bg);
+      color: var(--carbon-text);
+      border: 1px solid var(--carbon-border);
+    }
+
     .level-pill {
       display: inline-block;
       font-size: 0.74rem;
@@ -746,7 +755,7 @@
                 <polyline points="2 17 12 22 22 17"></polyline>
                 <polyline points="2 12 12 17 22 12"></polyline>
               </svg>
-              <span>Vai trò 3 Model</span>
+              <span>Vai trò 4 Model</span>
             </span>
           </div>
           <div class="model-summary-list">
@@ -767,9 +776,16 @@
             <div class="model-summary-item">
               <div class="model-summary-top">
                 <span class="badge badge-argon">Argon</span>
-                <span class="level-pill level-high">Hạng nặng</span>
+                <span class="level-pill level-medium">Phân tích</span>
               </div>
-              <p>Chiến lược, kiến trúc (Medium); bảo mật, tiền Ads (High).</p>
+              <p>Phân tích kỹ thuật, kiến trúc vừa, tối ưu gọn nhẹ.</p>
+            </div>
+            <div class="model-summary-item">
+              <div class="model-summary-top">
+                <span class="badge badge-carbon">Carbon</span>
+                <span class="level-pill level-high">Tuyến cuối</span>
+              </div>
+              <p>Gỡ lỗi đa tầng, bảo mật, tiền Ads, kiến trúc lớn.</p>
             </div>
           </div>
         </div>
@@ -796,11 +812,11 @@
             </div>
             <div class="rule-item">
               <span class="rule-num">3</span>
-              <span><strong>Việc lớn:</strong> Đẩy lên <strong>Argon (Medium)</strong> khi chốt kiến trúc.</span>
+              <span><strong>Việc lớn:</strong> Đẩy lên <strong>Argon (Medium)</strong> khi cần phân tích kỹ.</span>
             </div>
             <div class="rule-item">
               <span class="rule-num">4</span>
-              <span><strong>Bật High:</strong> Chỉ dùng cho bảo mật, tiền Ads, phủ định chéo, gỡ lỗi sâu.</span>
+              <span><strong>Ca nặng &amp; tiền bạc:</strong> Dùng <strong>Carbon (Medium/High)</strong> cho bảo mật, tiền Ads, lỗi sâu.</span>
             </div>
           </div>
         </div>
@@ -872,7 +888,7 @@
       { cat: 'Website', task: 'Kiểm tra tối ưu chuyển đổi (CRO) toàn web trước khi chạy Ads', model: 'Argon', level: 'Medium', reason: 'Phân tích sâu hành trình khách hàng để tìm điểm rớt đơn.',
         codex: { model: 'Astra', level: 'Medium', reason: 'Cần rà đường đi từ trang đích tới bước liên hệ và xếp thứ tự các điểm cản chuyển đổi.' }
       },
-      { cat: 'Website', task: 'Sửa lỗi tốc độ nặng (Core Web Vitals), diệt mã độc, bảo mật web', model: 'Argon', level: 'High', reason: 'Đụng hệ thống đang chạy, cần tìm đúng nguyên nhân gốc tránh sập web.',
+      { cat: 'Website', task: 'Sửa lỗi tốc độ nặng (Core Web Vitals), diệt mã độc, bảo mật web', model: 'Carbon', level: 'High', reason: 'Đụng hệ thống đang chạy, cần truy tận gốc mã độc ẩn tránh sập web.',
         codex: { model: 'Astra', level: 'High', reason: 'Cần đối chiếu mã nguồn, số liệu hiệu năng và dấu hiệu nhiễm mã độc để tìm nguyên nhân gốc.' }
       },
 
@@ -909,13 +925,13 @@
       { cat: 'Google Ads', task: 'Tạo từ khóa phủ định chéo để các nhóm không tự cạnh tranh nhau', model: 'Neon', level: 'High', reason: 'Tính kỹ logic chéo để tránh chặn nhầm từ khóa ra đơn.',
         codex: { model: 'Sol', level: 'High', reason: 'Đối chiếu phủ định hai chiều để tránh chặn nhầm truy vấn có giá trị.' }
       },
-      { cat: 'Google Ads', task: 'Kiểm tra toàn diện tài khoản, tìm nguyên nhân tụt đơn hoặc tăng giá/khách (CPA)', model: 'Argon', level: 'High', reason: 'Liên quan trực tiếp tới tiền quảng cáo, cần đối chiếu nhiều lớp dữ liệu.',
+      { cat: 'Google Ads', task: 'Kiểm tra toàn diện tài khoản, tìm nguyên nhân tụt đơn hoặc tăng giá/khách (CPA)', model: 'Carbon', level: 'High', reason: 'Liên quan trực tiếp tới tiền quảng cáo, cần đối chiếu sâu nhiều lớp dữ liệu.',
         codex: { model: 'Astra', level: 'High', reason: 'Cần kiểm tra giả thuyết từ chi phí, tỷ lệ chuyển đổi và tình trạng tracking.' }
       },
       { cat: 'Google Ads', task: 'Nghiên cứu từ khóa gốc (Seed Keyword) Google Ads cho dự án đa dịch vụ / song ngữ', model: 'Argon', level: 'Medium', reason: 'Tách chuẩn các nhánh dịch vụ, phân loại song ngữ và chặn sớm từ khóa dễ đốt tiền; bật High nếu muốn rà soát tối đa.',
         codex: { model: 'Astra', level: 'Medium', reason: 'Cần bóc tách nhiều nhánh dịch vụ, phân biệt ý định theo ngôn ngữ và rà khoảng trống trang đích.' }
       },
-      { cat: 'Google Ads', task: 'Gỡ xung đột chiến dịch phức tạp hoặc lập chiến lược từ đầu', model: 'Argon', level: 'Medium', reason: 'Suy luận sâu, giảm tối đa rủi ro đốt ngân sách.',
+      { cat: 'Google Ads', task: 'Gỡ xung đột chiến dịch phức tạp hoặc lập chiến lược từ đầu', model: 'Carbon', level: 'Medium', reason: 'Suy luận sâu, đánh giá đánh đổi ngân sách giữa các phễu để tránh đốt tiền.',
         codex: { model: 'Astra', level: 'Medium', reason: 'Cần cân nhắc độ chồng lấn, mục tiêu và cách phân bổ ngân sách giữa chiến dịch.' }
       },
 
@@ -932,13 +948,13 @@
       { cat: 'SaaS', task: 'Kiểm tra lại code, soi lỗi giao diện do AI tạo, dọn gọn code', model: 'Neon', level: 'High', reason: 'Rà kỹ lỗi ẩn và sự liên kết giữa nhiều file cùng lúc.',
         codex: { model: 'Sol', level: 'High', reason: 'Cần theo luồng dữ liệu và kiểm tra lỗi tiềm ẩn trước khi chỉnh cấu trúc code.' }
       },
-      { cat: 'SaaS', task: 'Thiết kế kiến trúc hệ thống, cấu trúc dữ liệu (Database)', model: 'Argon', level: 'Medium', reason: 'Chốt nền tảng vững ngay từ đầu để tránh phải đập đi làm lại.',
+      { cat: 'SaaS', task: 'Thiết kế kiến trúc hệ thống, cấu trúc dữ liệu (Database)', model: 'Carbon', level: 'Medium', reason: 'Chốt nền tảng vững ngay từ đầu để tránh phải đập đi làm lại khi mở rộng.',
         codex: { model: 'Astra', level: 'Medium', reason: 'Cần cân nhắc cấu trúc dữ liệu, trách nhiệm từng phần và các đánh đổi khi mở rộng.' }
       },
-      { cat: 'SaaS', task: 'Tìm và sửa lỗi nặng (xung đột, chậm hệ thống) mà Neon chưa gỡ được', model: 'Argon', level: 'High', reason: 'Đào sâu nguyên nhân gốc qua nhiều tầng mã nguồn.',
+      { cat: 'SaaS', task: 'Tìm và sửa lỗi nặng (xung đột, chậm hệ thống) mà Neon chưa gỡ được', model: 'Carbon', level: 'High', reason: 'Đào sâu nguyên nhân gốc qua nhiều tầng mã nguồn khi các model khác bế tắc.',
         codex: { model: 'Astra', level: 'High', reason: 'Cần lần theo lỗi qua nhiều tầng và đối chiếu bằng log hoặc số liệu hiệu năng.' }
       },
-      { cat: 'SaaS', task: 'Kiểm tra bảo mật (OWASP), rà soát thanh toán và phân quyền trước khi đưa lên mạng', model: 'Argon', level: 'High', reason: 'Cần độ khắt khe tối đa để không lọt lỗ hổng nghiêm trọng.',
+      { cat: 'SaaS', task: 'Kiểm tra bảo mật (OWASP), rà soát thanh toán và phân quyền trước khi đưa lên mạng', model: 'Carbon', level: 'High', reason: 'Cần độ khắt khe tối đa để không lọt lỗ hổng nghiêm trọng.',
         codex: { model: 'Astra', level: 'High', reason: 'Cần rà phân quyền, luồng thanh toán và các trạng thái lỗi trước khi triển khai.' }
       },
 
@@ -961,7 +977,7 @@
       { cat: 'SEO', task: 'Kiểm tra kỹ thuật SEO toàn diện (thu thập dữ liệu, lập chỉ mục, Schema)', model: 'Argon', level: 'Medium', reason: 'Nhiều yếu tố kỹ thuật đan xen, mức Medium phân loại P0–P3 rất chuẩn.',
         codex: { model: 'Astra', level: 'Medium', reason: 'Cần liên hệ tín hiệu crawl, index và Schema để xếp thứ tự xử lý.' }
       },
-      { cat: 'SEO', task: 'Kiểm định kế hoạch SEO lớn hoặc xử lý web bị tụt traffic nặng / án phạt', model: 'Argon', level: 'High', reason: 'Rủi ro cao, cần đối chiếu đa chiều kỹ lưỡng nhất.',
+      { cat: 'SEO', task: 'Kiểm định kế hoạch SEO lớn hoặc xử lý web bị tụt traffic nặng / án phạt', model: 'Carbon', level: 'High', reason: 'Rủi ro cao, cần đối chiếu đa chiều lịch sử web và tín hiệu phạt kỹ nhất.',
         codex: { model: 'Astra', level: 'High', reason: 'Cần đối chiếu thời điểm tụt traffic với lịch sử thay đổi và dữ liệu tìm kiếm.' }
       }
     ];
@@ -970,6 +986,7 @@
       Hydrogen: { name: 'Hydrogen', color: 'hydro' },
       Neon: { name: 'Neon', color: 'neon' },
       Argon: { name: 'Argon', color: 'argon' },
+      Carbon: { name: 'Carbon', color: 'carbon' },
       Sol: { name: 'GPT-6.1-Sol', color: 'neon', role: 'Việc thường ngày, viết code, Google Ads và SEO theo yêu cầu rõ.' },
       Terra: { name: 'GPT-6.1 Terra', color: 'hydro', role: 'Đọc ảnh chụp và kiểm tra giao diện trên màn hình.' },
       Astra: { name: 'GPT-6-Astra', color: 'argon', role: 'Kiến trúc, chiến lược và chẩn đoán vấn đề có nhiều nguyên nhân.' }
